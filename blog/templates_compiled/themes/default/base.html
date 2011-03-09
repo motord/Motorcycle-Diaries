@@ -1,0 +1,80 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/themes/default/base.html'
+
+def root(context, environment=environment):
+    l_config = context.resolve('config')
+    l_generator_class = context.resolve('generator_class')
+    if 0: yield None
+    yield u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n  <title>'
+    for event in context.blocks['title'][0](context):
+        yield event
+    yield u'</title>\n'
+    if environment.getattr(l_config, 'blogcatalog'):
+        if 0: yield None
+        yield u'\n  <meta name="blogcatalog" content="%s" />\n' % (
+            escape(environment.getattr(l_config, 'blogcatalog')), 
+        )
+    yield u'\n  <link rel="stylesheet" type="text/css" media="screen" href="/media/themes/%s/css/screen.css" />\n  <link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />\n  ' % (
+        escape(environment.getattr(l_config, 'theme')), 
+    )
+    for event in context.blocks['head'][0](context):
+        yield event
+    yield u'\n</head>\n<body>\n\t<div id="header-wrap"><div id="header" class="container_16">\t\t\t\t\t\t\n\t\t<h1 id="logo-text"><a href="/" title="">%s</a></h1>\t\t\n\t\t<p id="intro">%s</p>\n\t\t<div  id="nav">\n\t\t\t<ul>\n\t\t\t\t<li' % (
+        escape(environment.getattr(l_config, 'blog_name')), 
+        escape(environment.getattr(l_config, 'slogan')), 
+    )
+    if l_generator_class == 'IndexContentGenerator':
+        if 0: yield None
+        yield u' id="current"'
+    yield u'><a href="/">Home</a></li>\n        '
+    for event in context.blocks['menu'][0](context):
+        yield event
+    yield u'\n\t\t\t</ul>\n\t\t</div>\t\t\n\t\t<div id="header-image"></div> \n    <form id="quick-search" action="/search" method="get">\n      <p>\n        <label for="q">Search:</label>\n        <input type="hidden" name="cref" value="http://%s/cse.xml" />\n        <input type="hidden" name="cof" value="FORID:11" />\n        <input type="hidden" name="ie" value="UTF-8" />\n        <input class="tbox" type="text" name="q" size="31" />\n        <input class="btn" type="image" name="sa" value="Search" src="/media/themes/%s/images/search.gif" alt="Search" />\n      </p>\n    </form>\n    <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&lang=en"></script>\n\t</div></div>\n\t<div id="content-outer"><div id="content-wrapper" class="container_16">\n\t\t<div id="main" class="grid_12">\n      ' % (
+        escape(environment.getattr(l_config, 'host')), 
+        escape(environment.getattr(l_config, 'theme')), 
+    )
+    for event in context.blocks['body'][0](context):
+        yield event
+    yield u'\n\t\t</div>\n\t\t<div id="left-columns" class="grid_4">\n      '
+    l_sidebar = missing
+    for l_sidebar in environment.getattr(l_config, 'sidebars'):
+        if 0: yield None
+        yield u'\n        <div class="sidemenu">\n          <h3>%s</h3>\n          <ul>\n            ' % (
+            escape(environment.getitem(l_sidebar, 0)), 
+        )
+        l_entry = missing
+        for l_entry in environment.getitem(l_sidebar, 1):
+            if 0: yield None
+            yield u'\n              <li><a href="%s">%s</a></li>\n            ' % (
+                escape(environment.getitem(l_entry, 1)), 
+                escape(environment.getitem(l_entry, 0)), 
+            )
+        l_entry = missing
+        yield u'\n          </ul>\n        </div>\n      '
+    l_sidebar = missing
+    yield u'\n\t\t</div>\t\t\n\t</div></div>\n\t<div id="footer-wrapper" class="container_16">\n\t\t<div id="footer-bottom">\n\t\t\t<p class="bottom-left">\t\t\t\n\t\t\t&nbsp; &copy; %s &nbsp; &nbsp;\n\t\t\tDesign by : <a href="http://www.styleshout.com/">styleshout</a>\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t</p>\t\n\t\t\t<p class="bottom-right" >\n\t\t\t\t<a href="/">Home</a> |\n        <a href="/feeds/atom.xml">Atom</a> |\n\t\t\t\t<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | \n\t\t   \t<a href="http://validator.w3.org/check/referer">XHTML</a>\n\t\t\t</p>\n\t\t</div>\t\n\t</div>\n' % (
+        escape(environment.getattr(l_config, 'author_name')), 
+    )
+    if environment.getattr(l_config, 'analytics_id'):
+        if 0: yield None
+        yield u'\n  <script type="text/javascript">\n  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n  document.write(unescape("%%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%%3E%%3C/script%%3E"));\n  </script>\n  <script type="text/javascript">\n  try {\n  var pageTracker = _gat._getTracker("%s");\n  pageTracker._trackPageview();\n  } catch(err) {}</script>\n' % (
+            escape(environment.getattr(l_config, 'analytics_id')), 
+        )
+    yield u'\n</body>\n</html>'
+
+def block_body(context, environment=environment):
+    if 0: yield None
+
+def block_menu(context, environment=environment):
+    if 0: yield None
+
+def block_head(context, environment=environment):
+    if 0: yield None
+
+def block_title(context, environment=environment):
+    if 0: yield None
+    yield u'Blogokay'
+
+blocks = {'body': block_body, 'menu': block_menu, 'head': block_head, 'title': block_title}
+debug_info = '1=9&4=10&5=13&6=16&7=18&8=19&10=21&14=24&15=25&18=27&19=31&26=34&30=35&37=37&40=41&42=44&44=47&45=50&46=54&49=56&55=57&66=59&73=62&76=64&37=66&19=69&10=72&4=75'

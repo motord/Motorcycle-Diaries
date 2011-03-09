@@ -1,0 +1,81 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/themes/web-app/listing.html'
+
+def root(context, environment=environment):
+    parent_template = None
+    l_config = context.resolve('config')
+    if 0: yield None
+    parent_template = environment.get_template(('blog/themes/%s/base.html' % environment.getattr(l_config, 'theme')), '/themes/web-app/listing.html')
+    for name, parent_block in parent_template.blocks.iteritems():
+        context.blocks.setdefault(name, []).append(parent_block)
+    for event in parent_template.root_render_func(context):
+        yield event
+
+def block_body(context, environment=environment):
+    l_next_page = context.resolve('next_page')
+    l_prev_page = context.resolve('prev_page')
+    l_no_post = context.resolve('no_post')
+    l_posts = context.resolve('posts')
+    l_config = context.resolve('config')
+    t_1 = environment.filters['date']
+    t_2 = environment.filters['safe']
+    t_3 = environment.filters['e']
+    if 0: yield None
+    yield u'\n\n\t'
+    if l_no_post:
+        if 0: yield None
+        yield u'\n\t<div class="block">\n\t\t<div class="content">\n\t\t\t<div class="inner">\n\t\t\t\t<h2>Welcome to the The O-Kay-Blog</h2>\n\t\t\t\t<p>Your flashy new blog needs some content!</p>\n\t\t\t\t<p>Create some new posts at the Admin Page.</p>\n\t\t\t\t<p>\n\t\t\t\t<a href="/admin/newpost">Go to the Admin Page.</a>\n\t\t\t\t</p>\t\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t'
+    yield u'\t\n\t'
+    l_post = missing
+    l_config = context.resolve('config')
+    for l_post in l_posts:
+        if 0: yield None
+        yield u'\n\t<!-- post -->\n\t<div class="block">\n        <div class="secondary-navigation">\n          <ul>\n            <li class="first"><a href="%s" rel="bookmark" title="Permanent Link:%s">%s</a></li>\n          </ul>\n          <div class="clear"></div>\n        </div>\n        <div class="content">\n\t\t\t<div class="inner">\n\t\t\t<p>\n\t\t\t\t<span class="post-meta">Posted by %s on %s</span>\n\t\t\t</p>\n\t\t\t<div class="clear"></div>\n\t\t\t%s\n\t\t\t\t<div>\n\t\t\t    <p>\n\t\t\t      <a href="%s" class="readmore">Read more</a>\n\t\t\t      ' % (
+            escape(environment.getattr(l_post, 'path')), 
+            escape(t_3(environment.getattr(l_post, 'title'))), 
+            escape(t_3(environment.getattr(l_post, 'title'))), 
+            escape(t_3(environment.getattr(l_config, 'author_name'))), 
+            escape(t_1(environment.getattr(l_post, 'published'), '%d %B, %Y')), 
+            escape(t_2(environment.getattr(l_post, 'summary'))), 
+            escape(environment.getattr(l_post, 'path')), 
+        )
+        if environment.getattr(l_config, 'disqus_forum'):
+            if 0: yield None
+            yield u'\n\t\t\t       | <a href="%s#disqus_thread" class="readmore">Comments</a>\n\t\t\t      ' % (
+                escape(environment.getattr(l_post, 'path')), 
+            )
+        yield u'\n\t\t\t    </p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n    </div>\n\t<!-- /post -->\n\t'
+    l_post = missing
+    yield u'\n\t\n\t'
+    if (l_prev_page or l_next_page):
+        if 0: yield None
+        yield u'\n    <div class="block">\n      <div class="content">\n        <div class="inner">\n\t        <div class="pagination">\n\t\t\t'
+        if l_prev_page:
+            if 0: yield None
+            yield u'<a href="%s">\xab Older Entries</a>' % (
+                escape(l_prev_page), 
+            )
+        yield u'\n\t\t\t'
+        if l_next_page:
+            if 0: yield None
+            yield u'<a rel="next" href="%s">Newer Entries \xbb</a>' % (
+                escape(l_next_page), 
+            )
+        yield u'\n            </div>\n            <div class="clear"></div>\n        </div>\n      </div>\n    </div>\n\t'
+    yield u'\n\t<div class="clear"></div>\n  '
+    if environment.getattr(l_config, 'disqus_forum'):
+        if 0: yield None
+        yield u'\n    <script type="text/javascript">\n    //<![CDATA[\n    (function() {\n      var links = document.getElementsByTagName(\'a\');\n      var query = \'?\';\n      for(var i = 0; i < links.length; i++) {\n      if(links[i].href.indexOf(\'#disqus_thread\') >= 0) {\n        query += \'url\' + i + \'=\' + encodeURIComponent(links[i].href) + \'&\';\n      }\n      }\n      document.write(\'<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/%s/get_num_replies.js\' + query + \'"></\' + \'script>\');\n    })();\n    //]]>\n    </script>\n  ' % (
+            escape(environment.getattr(l_config, 'disqus_forum')), 
+        )
+    yield u'\n'
+
+def block_title(context, environment=environment):
+    l_config = context.resolve('config')
+    t_3 = environment.filters['e']
+    if 0: yield None
+    yield escape(t_3(environment.getattr(l_config, 'blog_name')))
+
+blocks = {'body': block_body, 'title': block_title}
+debug_info = '1=9&3=15&5=26&18=29&19=32&24=35&31=38&34=40&37=41&38=43&39=46&40=48&47=50&49=51&54=54&55=60&61=66&63=67&74=70&78=72&2=74'

@@ -1,0 +1,26 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/themes/web-app/search.html'
+
+def root(context, environment=environment):
+    parent_template = None
+    l_config = context.resolve('config')
+    if 0: yield None
+    parent_template = environment.get_template(('blog/themes/%s/base.html' % environment.getattr(l_config, 'theme')), '/themes/web-app/search.html')
+    for name, parent_block in parent_template.blocks.iteritems():
+        context.blocks.setdefault(name, []).append(parent_block)
+    for event in parent_template.root_render_func(context):
+        yield event
+
+def block_body(context, environment=environment):
+    if 0: yield None
+    yield u'\n<div class="block">\n\t<div class="content">\n\t\t<div class="inner">\n\t\t\t<div id="cse-search-results"></div>\n\t\t\t<script type="text/javascript">\n\t\t\t  var googleSearchIframeName = "cse-search-results";\n\t\t\t  var googleSearchFormName = "cse-search-box";\n\t\t\t  var googleSearchFrameWidth = 649;\n\t\t\t  var googleSearchDomain = "www.google.com";\n\t\t\t  var googleSearchPath = "/cse";\n\t\t\t</script>\n\t\t\t<script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>\n\t\t</div>\n\t</div>\n</div>\n'
+
+def block_title(context, environment=environment):
+    l_config = context.resolve('config')
+    if 0: yield None
+    yield u'Search results - '
+    yield escape(environment.getattr(l_config, 'blog_name'))
+
+blocks = {'body': block_body, 'title': block_title}
+debug_info = '1=9&3=15&2=19'

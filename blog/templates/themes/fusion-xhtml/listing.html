@@ -1,0 +1,66 @@
+{% extends "blog/themes/%s/base.html" % config.theme %}
+{% block title %}{{config.blog_name|e}}{% endblock %}
+{% block body %}
+	{# newly installed blog with no_post #}
+	{% if no_post %}
+	  <h2>Welcome to the The O-Kay-Blog</h2>
+		<p>Your flashy new blog needs some content!</p>
+		<p>Create some new posts at the Admin Page.</p>
+		<p>
+		<a href="/admin/newpost">Go to the Admin Page.</a>
+		</p>	
+	{% endif %}	
+	{% for post in posts %}
+	<!-- post -->
+	<div class="post hentry">
+		<h3 class="posttitle"><a href="{{post.path}}" rel="bookmark" title="Permanent Link:{{post.title|e}}">{{post.title|e}}</a></h3>
+		<!-- story header -->
+		<div class="postheader">
+			<div class="postinfo">
+				<p>Posted by {{config.author_name|e}} on {{post.published|date("%d %B, %Y")}}</p>
+			</div>
+		</div>	
+		<!-- /story-header -->
+		
+		<div class="postbody entry clearfix">
+    		{{post.summary|safe}}
+		</div>
+		<div class="postcontrols">
+		    <div class="postmeta">
+		      <a href="{{post.path}}" class="readmore">Read more</a>
+		      {% if config.disqus_forum %}
+		       | <a href="{{post.path}}#disqus_thread" class="readmore">Comments</a>
+		      {% endif %}
+		    </div>			
+		</div>
+		<div class="clear"></div>
+	</div>
+	<!-- /post -->
+	{% endfor %}
+
+	<div class="navigation" id="pagenavi">
+    {% if next_page %}
+    <div class="alignleft"><a id="next" href="{{next_page}}">&laquo; Older Entries</a></div>
+    {% endif %}
+	{% if prev_page %}
+    <div class="alignright"><a id="prev" href="{{prev_page}}">Newer Entries &raquo;</a></div>
+    {% endif %}
+	<div class="clear"></div>
+	</div>
+  {% if config.disqus_forum %}
+    <script type="text/javascript">
+    //<![CDATA[
+    (function() {
+      var links = document.getElementsByTagName('a');
+      var query = '?';
+      for(var i = 0; i < links.length; i++) {
+      if(links[i].href.indexOf('#disqus_thread') >= 0) {
+        query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+      }
+      }
+      document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/{{config.disqus_forum}}/get_num_replies.js' + query + '"></' + 'script>');
+    })();
+    //]]>
+    </script>
+  {% endif %}
+{% endblock %}

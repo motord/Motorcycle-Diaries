@@ -1,0 +1,122 @@
+/* Sticky footer */
+* {
+    margin:0;
+    padding:0;
+}
+
+/* must declare 0 margins on everything, also for main layout components use padding, not 
+vertical margins (top and bottom) to add spacing, else those margins get added to total height 
+and your footer gets pushed down a bit more, creating vertical scroll bars in the browser */
+
+html, body, #wrap {
+    height: 100%;
+    }
+
+body > #wrap {
+    height: auto; 
+    min-height: 100%;
+    background: #e9eef1;
+    }
+    
+#doc4 {
+    height: 100%;
+    background: #fff;
+    padding-bottom: 150px;}  /* must be same height as the footer */
+
+#footer-block {position: relative;
+    text-align: center;
+	padding: 4px 4px 4px 14px;
+	background: #f0f2f4;
+	border-top: 1px solid #babec8;
+	margin-top: -150px; /* negative value of footer height */
+	height: 150px;
+	clear:both;} 
+
+/* CLEAR FIX*/
+.clearfix:after {
+    content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	}
+	
+.clearfix {
+    display: inline-block;
+    }
+    
+/* Hides from IE-mac \*/
+* html .clearfix { 
+    height: 1%;
+    }
+    
+.clearfix {
+    display: block;
+    }
+/* End hide from IE-mac */
+
+body {
+    margin: 0px;
+	background: #e9eef1;
+}
+
+h1 { font-size: 2em;}
+
+/* HTML Form Elements */
+
+dd {
+    margin: 2px 0px 4px 0px;
+}
+
+a:hover { 
+    text-decoration:none;
+    color: #7F3B85;
+}
+
+a {
+    text-decoration: none;
+    color: #16387C;
+}
+
+
+/* Post form */
+#f_title { width: 280px;}
+
+#doc4 {
+    border-left: 1px solid #babec8;
+    border-right: 1px solid #babec8;
+}
+
+#header-block {
+    text-align: center;
+	padding: 2px 4px 2px 14px;
+	border-bottom: 4px solid #731A8B;
+	background: #f9fafb;
+}
+
+#header-block h2 {
+	font: bold 1em/1.5em Georgia, 'Times New Roman', Times, serif;
+	font-size: 3.7em; font-weight: heavy; letter-spacing: -2px;
+	margin: 4px 0px 4px 20px;
+	color: #731A8B;
+}
+
+#header-block h3 {
+	font: bold 1.5em Georgia, 'Times New Roman', Times, serif;
+	font-weight: normal;
+	margin: 4px 0px 4px 100px;
+	color: #304E8A;
+}
+
+.container { 
+	padding: 2px;
+	margin: 2px;
+	}
+	
+.main-content {
+	margin: 14px;
+}
+
+#yuimain {
+    background: #e9eef1;
+}

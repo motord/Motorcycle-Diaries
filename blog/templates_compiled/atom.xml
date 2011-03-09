@@ -1,0 +1,41 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/atom.xml'
+
+def root(context, environment=environment):
+    l_posts = context.resolve('posts')
+    l_updated = context.resolve('updated')
+    l_config = context.resolve('config')
+    t_1 = environment.filters['date']
+    t_2 = environment.filters['e']
+    if 0: yield None
+    yield u'<?xml version="1.0" encoding="utf-8"?>\n\n<feed xmlns="http://www.w3.org/2005/Atom">\n    <title type="text">%s</title>\n    <subtitle type="html">%s</subtitle>\n    <updated>%s</updated>\n    <id>tag:%s,2009:atom.xml</id>\n    <link rel="alternate" type="text/html" hreflang="en" href="http://%s/" />\n    <link rel="self" type="application/atom+xml" href="http://%s/feeds/atom.xml" />\n    <link rel="hub" href="%s" />\n    <rights>Copyright (c) 2009</rights>\n    <generator uri="http://%s/" version="1.0">\n        Blog-O-Kay 1.0\n    </generator>\n    ' % (
+        escape(environment.getattr(l_config, 'blog_name')), 
+        escape(environment.getattr(l_config, 'slogan')), 
+        escape(t_1(l_updated, '%Y-%m-%dT%H:%M:%SZ')), 
+        escape(environment.getattr(l_config, 'host')), 
+        escape(environment.getattr(l_config, 'host')), 
+        escape(environment.getattr(l_config, 'host')), 
+        escape(environment.getattr(l_config, 'hubbub_hub_url')), 
+        escape(environment.getattr(l_config, 'host')), 
+    )
+    l_post = missing
+    for l_post in l_posts:
+        if 0: yield None
+        yield u'\n    <entry>\n        <title>%s</title>\n        <link rel="alternate" type="text/html" href="http://%s%s" />\n        <id>tag:%s,2009:post:%s</id>\n        <updated>%s</updated>\n        <published>%s</published>\n        <author>\n            <name>%s</name>\n            <uri>http://%s/</uri>\n        </author>\n        <content type="html">\n            %s\n        </content>\n    </entry>\n    ' % (
+            escape(t_2(environment.getattr(l_post, 'title'))), 
+            escape(environment.getattr(l_config, 'host')), 
+            escape(environment.getattr(l_post, 'path')), 
+            escape(environment.getattr(l_config, 'host')), 
+            escape(context.call(environment.getattr(context.call(environment.getattr(l_post, 'key')), 'id'))), 
+            escape(t_1(environment.getattr(l_post, 'updated'), '%Y-%m-%dT%H:%M:%SZ')), 
+            escape(t_1(environment.getattr(l_post, 'published'), '%Y-%m-%dT%H:%M:%SZ')), 
+            escape(environment.getattr(l_config, 'author_name')), 
+            escape(environment.getattr(l_config, 'host')), 
+            escape(t_2(environment.getattr(l_post, 'body'))), 
+        )
+    l_post = missing
+    yield u'\n</feed>'
+
+blocks = {}
+debug_info = '1=12&4=13&5=14&6=15&7=16&8=17&9=18&10=19&12=20&15=23&17=26&18=27&19=29&20=31&21=32&23=33&24=34&27=35&30=38'

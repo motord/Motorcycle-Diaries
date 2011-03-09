@@ -1,0 +1,21 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/sitemap.xml'
+
+def root(context, environment=environment):
+    l_paths = context.resolve('paths')
+    if 0: yield None
+    yield u'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  '
+    l_path = missing
+    l_config = context.resolve('config')
+    for l_path in l_paths:
+        if 0: yield None
+        yield u'\n    <url>\n      <loc>http://%s%s</loc>\n    </url>\n  ' % (
+            escape(environment.getattr(l_config, 'host')), 
+            escape(l_path), 
+        )
+    l_path = missing
+    yield u'\n</urlset>'
+
+blocks = {}
+debug_info = '1=8&3=11&5=14&7=18'

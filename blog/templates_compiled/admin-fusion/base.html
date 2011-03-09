@@ -1,0 +1,78 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/admin-fusion/base.html'
+
+def root(context, environment=environment):
+    l_menu_view = context.resolve('menu_view')
+    l_config = context.resolve('config')
+    l_menu_new = context.resolve('menu_new')
+    t_1 = environment.filters['e']
+    if 0: yield None
+    yield u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">\n <head>\n    <title>The O-Kay-Blog '
+    for event in context.blocks['title'][0](context):
+        yield event
+    yield u'</title>\n    <meta name="keywords" content="the-okay-blog" />\n    <meta name="description" content="%s" />\n    <link rel="pingback" href="http://%s" />\n\t' % (
+        escape(environment.getattr(l_config, 'slogan')), 
+        escape(environment.getattr(l_config, 'host')), 
+    )
+    if environment.getattr(l_config, 'blogcatalog'):
+        if 0: yield None
+        yield u'\n    <meta name="blogcatalog" content="%s" />\n\t' % (
+            escape(environment.getattr(l_config, 'blogcatalog')), 
+        )
+    yield u'\n\t<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />\n    <style type="text/css" media="all">\n     @import "/media/admin/css/style.css";\n    </style>\n    <!--[if lte IE 6]>\n    <script type="text/javascript">\n    /* <![CDATA[ */\n       blankimgpath = \'/media/themes/admin/images/blank.gif\';\n     /* ]]> */\n    </script>\n\n    <style type="text/css" media="screen">\n      @import "ie6.css";\n      body{ behavior:url("/media/admin/ie6hoverfix.htc"); }\n      img{ behavior: url("/media/admin/ie6pngfix.htc"); }\n    </style>\n    <![endif]-->\n\n    <script src="/media/admin/js/jquery.js" type="text/javascript"></script>\n    <script src="/media/admin/js/fusion.js" type="text/javascript"></script>\n    '
+    for event in context.blocks['head'][0](context):
+        yield event
+    yield u'\n\n    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>\n </head>\n <body class="home yui-skin-sam">\n  <!-- page wrappers (100%% width) -->\n  <div id="page-wrap1">\n    <div id="page-wrap2">\n      <!-- page (actual site content, custom width) -->\n      <div id="page" class="with-sidebar">\n\n       <!-- main wrapper (side & main) -->\n       <div id="main-wrap">\n        <!-- mid column wrap -->\n    \t<div id="mid-wrap">\n         <!-- sidebar wrap -->\n         <div id="side-wrap">\n          <!-- mid column -->\n    \t  <div id="mid">\n            <!-- header -->\n            <div id="header">\n\n              <div id="topnav"><p>%s</p></div>\n              <h1 id="logo"><a href="/">%s</a></h1>\n\n              <!-- top tab navigation -->\n              <div id="tabs">\n                <ul>\n                  <li><a href="/"><span><span>View Blog</span></span></a></li>\n                  <li><a href="/admin/" ' % (
+        escape(environment.getattr(l_config, 'slogan')), 
+        escape(environment.getattr(l_config, 'blog_name')), 
+    )
+    if l_menu_view:
+        if 0: yield None
+        yield u'class="active"'
+    yield u'><span><span>View Posts</span></span></a></li>\n                  <li><a href="/admin/newpost" '
+    if l_menu_new:
+        if 0: yield None
+        yield u'class="active"'
+    yield u'><span><span>New Posts</span></span></a></li>\n                </ul>\n              </div>\n              <!-- /top tabs -->\n\n            </div><!-- /header -->\n\n            <!-- mid content -->\n            <div id="mid-content">\n              \t'
+    for event in context.blocks['body'][0](context):
+        yield event
+    yield u'\n            </div>\n            <!-- /mid content -->\n          </div>\n          <!-- /mid -->\n\n          <!-- sidebar -->\n          <div id="sidebar">\n           <!-- sidebar 1st container -->\n          <div id="sidebar-wrap1">\n            <!-- sidebar 2nd container -->\n            <div id="sidebar-wrap2">\n\t\t\t  <ul id="sidelist">\n\t\t        <li> \n\t\t         <!-- google search form --> \n\t\t          <div id="googlesearch"> \n\t\t\t\t    <form id="quick-search" action="/search" method="get">\n\t\t\t\t      <p>\n\t\t\t\t        <label for="q">Search:</label>\n\t\t\t\t        <input type="hidden" name="cref" value="http://%s/cse.xml" />\n\t\t\t\t        <input type="hidden" name="cof" value="FORID:11" />\n\t\t\t\t        <input type="hidden" name="ie" value="UTF-8" />\n\t\t\t\t        <input class="tbox" type="text" id="q" name="q" size="21" />\n\t\t\t\t      </p>\n\t\t\t\t    </form>\n   \t\t\t\t\t<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>\t\t\t\t\t\n\t\t          </div>\n\t\t \t\t  <div>&nbsp;</div>\n\t\t         <!-- /google search form --> \n\t\t        </li> \n\t\t\t\t<li>\n\t\t\t\t\t<ul class="nav">\n\t\t\t\t      ' % (
+        escape(environment.getattr(l_config, 'host')), 
+    )
+    l_sidebar = missing
+    for l_sidebar in environment.getattr(l_config, 'sidebars'):
+        if 0: yield None
+        yield u'\n\t\t\t\t\t\t<!-- linkcat-->\n\t\t\t\t\t\t<li class="cat-item"><h2>%s</h2>\n\t\t\t\t          <ul>\n\t\t\t\t            ' % (
+            escape(environment.getitem(l_sidebar, 0)), 
+        )
+        l_entry = missing
+        for l_entry in environment.getitem(l_sidebar, 1):
+            if 0: yield None
+            yield u'\n\t\t\t\t              <li class="cat-item"><a href="%s" title="%s">%s</a></li>\n\t\t\t\t            ' % (
+                escape(environment.getitem(l_entry, 1)), 
+                escape(t_1(environment.getitem(l_entry, 0))), 
+                escape(environment.getitem(l_entry, 0)), 
+            )
+        l_entry = missing
+        yield u'\n\t\t\t\t          </ul>\n\t\t\t\t\t\t</li>\n\t\t\t\t      '
+    l_sidebar = missing
+    yield u'  \n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t  \t  </ul>    \t\n\t\t    </div>\n            <!-- /sidebar 2nd container -->\n           </div>\n           <!-- /sidebar 1st container -->\n          </div>\n          <!-- /sidebar -->\n         </div>\n         <!-- /side wrap -->\n        </div>\n        <!-- /mid column wrap -->\n       </div>\n       <!-- /main wrapper -->\n\n       <!-- clear main & sidebar sections -->\n       <div class="clearcontent"></div>\n       <!-- /clear main & sidebar sections -->\n\n       <!-- footer -->\n       <div id="footer">\n\t\t\t<p class="bottom-left">\t\t\t\n\t\t\tModified by <a href="http://www.theokayblog.com">Victor Goh</a> from original design by <a href="http://digitalnature.ro/">DigitalNature</a>\n\t\t\t</p>\t\n\t\t\t<p class="bottom-right" >\n\t\t\t\t<a href="/">Home</a> |\n        \t\t<a href="/feeds/atom.xml">Atom</a> |\n\t\t\t\t<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | \n\t\t   \t<a href="http://validator.w3.org/check/referer">XHTML</a>\n\t\t\t</p>\n       </div>\n       <!-- /footer -->\n\n       <!-- layout controls -->\n       <div id="layoutcontrol">\n         <a href="javascript:void(0);" class="setFont" title="Increase/Decrease text size"><span>SetTextSize</span></a>\n         <a href="javascript:void(0);" class="setLiquid" title="Switch between full and fixed width"><span>SetPageWidth</span></a>\n       </div>\n       <!-- /layout controls -->\n      </div>\n      <!-- /page -->\n\n     </div>\n  </div>\n  <!-- /page wrappers -->\n'
+    if environment.getattr(l_config, 'analytics_id'):
+        if 0: yield None
+        yield u'\n  <script type="text/javascript">\n  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n  document.write(unescape("%%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%%3E%%3C/script%%3E"));\n  </script>\n  <script type="text/javascript">\n  try {\n  var pageTracker = _gat._getTracker("%s");\n  pageTracker._trackPageview();\n  } catch(err) {}</script>\n' % (
+            escape(environment.getattr(l_config, 'analytics_id')), 
+        )
+    yield u'\n </body>\n</html>\n\n'
+
+def block_body(context, environment=environment):
+    if 0: yield None
+
+def block_head(context, environment=environment):
+    if 0: yield None
+
+def block_title(context, environment=environment):
+    if 0: yield None
+
+blocks = {'body': block_body, 'head': block_head, 'title': block_title}
+debug_info = '1=11&4=12&6=15&7=16&8=18&9=21&10=23&31=24&53=27&54=28&60=30&61=34&70=38&89=41&102=44&104=47&106=50&107=53&108=58&111=60&158=61&165=64&168=66&70=68&31=71&4=74'

@@ -1,0 +1,80 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/admin-fusion/edit.html'
+
+def root(context, environment=environment):
+    parent_template = None
+    if 0: yield None
+    parent_template = environment.get_template('blog/admin/base.html', '/admin-fusion/edit.html')
+    for name, parent_block in parent_template.blocks.iteritems():
+        context.blocks.setdefault(name, []).append(parent_block)
+    for event in parent_template.root_render_func(context):
+        yield event
+
+def block_body(context, environment=environment):
+    l_edit = context.resolve('edit')
+    l_form = context.resolve('form')
+    t_1 = environment.filters['safe']
+    if 0: yield None
+    yield u'\n<h2>Admin: '
+    if l_edit:
+        if 0: yield None
+        yield u'Edit Existing '
+    else:
+        if 0: yield None
+        yield u'Create New'
+    yield u' Post</h2>\n'
+    def macro():
+        t_2 = []
+        l_form = context.resolve('form')
+        pass
+        t_2.extend((
+            u'\n<dl>\n    <dt>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'title'), 'label')))), 
+            u' ', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'title'), 'errors')))), 
+            u'</dt>\n    <dd>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'title'), 'render')))), 
+            u'</dd>\n    <dt>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'body'), 'label')))), 
+            u' ', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'body'), 'errors')))), 
+            u'</dt>\n    <dd>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'body'), 'render')))), 
+            u'</dd>\n    <dt>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'tags'), 'label')))), 
+            u' ', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'tags'), 'errors')))), 
+            u'</dt>\n    <dd>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'tags'), 'render')))), 
+            u'</dd>\n    <dt>', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'draft'), 'label')))), 
+            u' ', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'draft'), 'render')))), 
+            u' ', 
+            escape(t_1(context.call(environment.getattr(environment.getattr(l_form, 'draft'), 'errors')))), 
+            u'</dt>\n\t<dt>&nbsp;</dt>\n</dl>\t\n\t<div class="actions"><input id="btn_submit" type="submit" value="Submit" /></div>\n', 
+        ))
+        return Markup(concat(t_2))
+    caller = Macro(environment, macro, None, (), (), False, False, False)
+    yield context.call(l_form, caller=caller)
+    yield u'\n \n<script type="text/javascript"> \n \n(function() {\n    var Dom = YAHOO.util.Dom,\n        Event = YAHOO.util.Event;\n    \n    var myConfig = {\n        height: \'200px\',\n        width: \'600px\',\n        dompath: true,\n\t\thandleSubmit: true,\n\t\tautoHeight: true,\n\t\tmarkup: \'xhtml\',\n\t\tptags: true,\n    };\n \n    var myEditor = new YAHOO.widget.Editor(\'f_body\', myConfig);\n    myEditor.render();\n \n})();\n\tdocument.getElementById("f_title").focus();\n</script> \n \n'
+
+def block_head(context, environment=environment):
+    if 0: yield None
+    yield u'\n<!-- Combo-handled YUI CSS files: -->\n<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/assets/skins/sam/skin.css" />\n<!-- Combo-handled YUI JS files: -->\n<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js&2.8.0r4/build/container/container_core-min.js&2.8.0r4/build/menu/menu-min.js&2.8.0r4/build/element/element-min.js&2.8.0r4/build/button/button-min.js&2.8.0r4/build/editor/editor-min.js"></script>\n'
+
+def block_title(context, environment=environment):
+    l_edit = context.resolve('edit')
+    if 0: yield None
+    yield u'Admin: '
+    if l_edit:
+        if 0: yield None
+        yield u'Edit'
+    else:
+        if 0: yield None
+        yield u'New'
+    yield u' Post'
+
+blocks = {'body': block_body, 'head': block_head, 'title': block_title}
+debug_info = '1=8&10=14&11=20&12=27&14=33&15=37&16=39&17=43&18=45&19=49&20=51&12=60&24=61&3=63&2=67'

@@ -1,0 +1,52 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/themes/yui-app/base.html'
+
+def root(context, environment=environment):
+    l_config = context.resolve('config')
+    t_1 = environment.filters['e']
+    if 0: yield None
+    yield u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">\n<head>\n    <title>'
+    for event in context.blocks['title'][0](context):
+        yield event
+    yield u'</title>\n    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />\n\t<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />\n    <link rel="stylesheet" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" />\n    <link rel="stylesheet" href="/media/themes/%s/css/yuiapp.css" type="text/css" />\n    <link id="theme" rel="stylesheet" href="/media/themes/%s/css/tan_blue.css" type="text/css" />\n    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>\n    <script src="/media/themes/%s/js/yuiapp.js" type="text/javascript"></script>\n</head>\n<body class="rounded">\n    <div id="doc3" class="yui-t6">\n\n        <div id="hd">\n            <h1><a href="/">%s</a></h1>\n            <div id="navigation">\n                <ul id="primary-navigation">\n                    <li class="active"><a href="/">Home</a></li>\n                </ul>\n                <div class="clear"></div>\n            </div>\n        </div>\n\n        <div id="bd">\n            <div id="yui-main">\n                <div class="yui-b"><div class="yui-g">\n\t\t\t\t\t' % (
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'blog_name')), 
+    )
+    for event in context.blocks['body'][0](context):
+        yield event
+    yield u'\n                </div></div>\n            </div>\n            <div id="sidebar" class="yui-b">\n\n                <!-- Sidebar block (same markup as basic block) -->\n                <div class="block">\n                    <div class="hd">\n                        <h2>Google Search</h2>\n                    </div>\n                    <div class="bd">\n\t\t\t\t\t    <form id="quick-search" action="/search" method="get">\n\t\t\t\t\t      <p>\n\t\t\t\t\t        <label for="q">Search:</label>\n\t\t\t\t\t        <input type="hidden" name="cref" value="http://%s/cse.xml" />\n\t\t\t\t\t        <input type="hidden" name="cof" value="FORID:11" />\n\t\t\t\t\t        <input type="hidden" name="ie" value="UTF-8" />\n\t\t\t\t\t        <input class="tbox" type="text" id="q" name="q" size="21" />\n\t\t\t\t\t      </p>\n\t\t\t\t\t    </form>\n\t\t\t\t\t\t<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>\t\t\t\t\t\n\t\t\t\t     </div>\t\n                </div>\n                <!-- Sidebars -->\n\t\t\t\t' % (
+        escape(environment.getattr(l_config, 'host')), 
+    )
+    l_sidebar = missing
+    for l_sidebar in environment.getattr(l_config, 'sidebars'):
+        if 0: yield None
+        yield u'\n                <div class="block">\n                    <div class="hd">\n                        <h2>%s</h2>\n                    </div>\n                    <div class="bd">\n\t\t\t\t          <ul class="biglist">\n\t\t\t\t\t\t\t' % (
+            escape(environment.getitem(l_sidebar, 0)), 
+        )
+        l_entry = missing
+        for l_entry in environment.getitem(l_sidebar, 1):
+            if 0: yield None
+            yield u'\n\t\t\t\t            <li><a href="%s" title="%s">%s</a></li>\n\t\t\t\t\t\t\t' % (
+                escape(environment.getitem(l_entry, 1)), 
+                escape(t_1(environment.getitem(l_entry, 0))), 
+                escape(environment.getitem(l_entry, 0)), 
+            )
+        l_entry = missing
+        yield u'\n\t\t\t\t          </ul>\n                    </div>\n                </div>\n\t\t        '
+    l_sidebar = missing
+    yield u'\n\n                <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Strict" height="31" width="88" /></a></p>\n            </div>\n        </div>\n\n        <div id="ft">\n            <p class="inner">Copyright &copy; 2009 %s</p>\n        </div>\n\n    </div>\n</body>\n</html>\n\n' % (
+        escape(environment.getattr(l_config, 'blog_name')), 
+    )
+
+def block_body(context, environment=environment):
+    if 0: yield None
+
+def block_title(context, environment=environment):
+    if 0: yield None
+    yield u' The O-Kay-Blog'
+
+blocks = {'body': block_body, 'title': block_title}
+debug_info = '1=9&4=10&8=13&9=14&11=15&17=16&29=18&43=21&53=24&56=27&60=30&61=33&62=38&66=40&73=41&29=44&4=47'

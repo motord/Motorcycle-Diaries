@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+ <head>
+    <title>The O-Kay-Blog {% block title %}{% endblock %}</title>
+    <meta name="keywords" content="the-okay-blog" />
+    <meta name="description" content="{{config.slogan}}" />
+    <link rel="pingback" href="http://{{config.host}}" />
+	{% if config.blogcatalog %}
+    <meta name="blogcatalog" content="{{config.blogcatalog}}" />
+	{% endif %}
+	<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />
+    <style type="text/css" media="all">
+     @import "/media/admin/css/style.css";
+    </style>
+    <!--[if lte IE 6]>
+    <script type="text/javascript">
+    /* <![CDATA[ */
+       blankimgpath = '/media/themes/admin/images/blank.gif';
+     /* ]]> */
+    </script>
+
+    <style type="text/css" media="screen">
+      @import "ie6.css";
+      body{ behavior:url("/media/admin/ie6hoverfix.htc"); }
+      img{ behavior: url("/media/admin/ie6pngfix.htc"); }
+    </style>
+    <![endif]-->
+
+    <script src="/media/admin/js/jquery.js" type="text/javascript"></script>
+    <script src="/media/admin/js/fusion.js" type="text/javascript"></script>
+    {% block head %}{% endblock %}
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+ </head>
+ <body class="home yui-skin-sam">
+  <!-- page wrappers (100% width) -->
+  <div id="page-wrap1">
+    <div id="page-wrap2">
+      <!-- page (actual site content, custom width) -->
+      <div id="page" class="with-sidebar">
+
+       <!-- main wrapper (side & main) -->
+       <div id="main-wrap">
+        <!-- mid column wrap -->
+    	<div id="mid-wrap">
+         <!-- sidebar wrap -->
+         <div id="side-wrap">
+          <!-- mid column -->
+    	  <div id="mid">
+            <!-- header -->
+            <div id="header">
+
+              <div id="topnav"><p>{{config.slogan}}</p></div>
+              <h1 id="logo"><a href="/">{{config.blog_name}}</a></h1>
+
+              <!-- top tab navigation -->
+              <div id="tabs">
+                <ul>
+                  <li><a href="/"><span><span>View Blog</span></span></a></li>
+                  <li><a href="/admin/" {% if menu_view %}class="active"{% endif %}><span><span>View Posts</span></span></a></li>
+                  <li><a href="/admin/newpost" {% if menu_new %}class="active"{% endif %}><span><span>New Posts</span></span></a></li>
+                </ul>
+              </div>
+              <!-- /top tabs -->
+
+            </div><!-- /header -->
+
+            <!-- mid content -->
+            <div id="mid-content">
+              	{% block body %}{% endblock %}
+            </div>
+            <!-- /mid content -->
+          </div>
+          <!-- /mid -->
+
+          <!-- sidebar -->
+          <div id="sidebar">
+           <!-- sidebar 1st container -->
+          <div id="sidebar-wrap1">
+            <!-- sidebar 2nd container -->
+            <div id="sidebar-wrap2">
+			  <ul id="sidelist">
+		        <li> 
+		         <!-- google search form --> 
+		          <div id="googlesearch"> 
+				    <form id="quick-search" action="/search" method="get">
+				      <p>
+				        <label for="q">Search:</label>
+				        <input type="hidden" name="cref" value="http://{{config.host}}/cse.xml" />
+				        <input type="hidden" name="cof" value="FORID:11" />
+				        <input type="hidden" name="ie" value="UTF-8" />
+				        <input class="tbox" type="text" id="q" name="q" size="21" />
+				      </p>
+				    </form>
+   					<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>					
+		          </div>
+		 		  <div>&nbsp;</div>
+		         <!-- /google search form --> 
+		        </li> 
+				<li>
+					<ul class="nav">
+				      {% for sidebar in config.sidebars %}
+						<!-- linkcat-->
+						<li class="cat-item"><h2>{{sidebar[0]}}</h2>
+				          <ul>
+				            {% for entry in sidebar.1 %}
+				              <li class="cat-item"><a href="{{entry[1]}}" title="{{entry[0]|e}}">{{entry[0]}}</a></li>
+				            {% endfor %}
+				          </ul>
+						</li>
+				      {% endfor %}  
+					</ul>
+				</li>
+		  	  </ul>    	
+		    </div>
+            <!-- /sidebar 2nd container -->
+           </div>
+           <!-- /sidebar 1st container -->
+          </div>
+          <!-- /sidebar -->
+         </div>
+         <!-- /side wrap -->
+        </div>
+        <!-- /mid column wrap -->
+       </div>
+       <!-- /main wrapper -->
+
+       <!-- clear main & sidebar sections -->
+       <div class="clearcontent"></div>
+       <!-- /clear main & sidebar sections -->
+
+       <!-- footer -->
+       <div id="footer">
+			<p class="bottom-left">			
+			Modified by <a href="http://www.theokayblog.com">Victor Goh</a> from original design by <a href="http://digitalnature.ro/">DigitalNature</a>
+			</p>	
+			<p class="bottom-right" >
+				<a href="/">Home</a> |
+        		<a href="/feeds/atom.xml">Atom</a> |
+				<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
+		   	<a href="http://validator.w3.org/check/referer">XHTML</a>
+			</p>
+       </div>
+       <!-- /footer -->
+
+       <!-- layout controls -->
+       <div id="layoutcontrol">
+         <a href="javascript:void(0);" class="setFont" title="Increase/Decrease text size"><span>SetTextSize</span></a>
+         <a href="javascript:void(0);" class="setLiquid" title="Switch between full and fixed width"><span>SetPageWidth</span></a>
+       </div>
+       <!-- /layout controls -->
+      </div>
+      <!-- /page -->
+
+     </div>
+  </div>
+  <!-- /page wrappers -->
+{% if config.analytics_id %}
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  try {
+  var pageTracker = _gat._getTracker("{{config.analytics_id}}");
+  pageTracker._trackPageview();
+  } catch(err) {}</script>
+{% endif %}
+ </body>
+</html>
+
+

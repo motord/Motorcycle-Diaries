@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>{% block title %} The O-Kay-Blog{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" />
+    <link rel="stylesheet" href="/media/admin/css/yuiapp.css" type="text/css" />
+    <link id="theme" rel="stylesheet" href="/media/admin/css/warehouse.css" type="text/css" />
+	{% block head %}{% endblock %}
+</head>
+<body class="rounded yui-skin-sam">
+    <div id="doc4" class="yui-t5">
+        <div id="hd">
+			<div id="hd_logo"><a href="http://www.theokayblog.com/"><img src="/media/admin/images/ok_logo_tiny.jpeg" /></a></div>
+            <h1>{{config.blog_name}} Admin</h1>
+            <div id="navigation">
+                <ul id="primary-navigation">
+                    <li><a href="/">View Blog</a></li>
+		            <li {% if menu_view %}class="active"{% endif %}><a href="/admin/">View Posts</a></li>
+		            <li {% if menu_new %}class="active"{% endif %}><a href="/admin/newpost">New Posts</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b"><div class="yui-g">
+					{% block body %}{% endblock %}
+                </div></div>
+            </div>
+            <div id="sidebar" class="yui-b">
+
+                <!-- Sidebar block (same markup as basic block) -->
+                <div class="block">
+                    <div class="hd">
+                        <h2>Google Search</h2>
+                    </div>
+                    <div class="bd">
+					    <form id="quick-search" action="/search" method="get">
+					      <p>
+					        <label for="q">Search:</label>
+					        <input type="hidden" name="cref" value="http://{{config.host}}/cse.xml" />
+					        <input type="hidden" name="cof" value="FORID:11" />
+					        <input type="hidden" name="ie" value="UTF-8" />
+					        <input class="tbox" type="text" id="q" name="q" size="21" />
+					      </p>
+					    </form>
+						<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>					
+				     </div>	
+                </div>
+                <!-- Sidebars -->
+				{% for sidebar in config.sidebars %}
+                <div class="block">
+                    <div class="hd">
+                        <h2>{{sidebar[0]}}</h2>
+                    </div>
+                    <div class="bd">
+				          <ul class="biglist">
+							{% for entry in sidebar.1 %}
+				            <li><a href="{{entry[1]}}" title="{{entry[0]|e}}">{{entry[0]}}</a></li>
+							{% endfor %}
+				          </ul>
+                    </div>
+                </div>
+		        {% endfor %}
+
+            </div>
+        </div>
+        <div id="ft">
+            <p class="inner">Copyright &copy; 2009 {{config.blog_name}}</p>
+			<p><a href="http://www.theokayblog.com"><img id="ft_logo" src="/media/admin/images/ok_logo_tiny.jpeg"  title="Powered by the O-Kay-Blog"/></a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+

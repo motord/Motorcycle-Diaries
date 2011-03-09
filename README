@@ -1,0 +1,17 @@
+==============
+The O-Kay-Blog
+==============
+
+What's this?
+------------
+
+The O-Kay-Blog is blogging system written using the Kay Framework to run on Google App Engine. 
+It is a clone of the Bloggart blog system by Nick Johnson http://github.com/Arachnid/bloggart
+http://blog.notdot.net/2009/10/Writing-a-blog-system-on-App-Engine
+
+To run this on Google App Engine, make the necessary changes in the following files:
+- app.yaml
+	- Change my-appid to your own Google App Engine appid
+- blog/config.py
+	- Change host from my-appid.appspot.com to your own host name.
+	- Change the other settings to customize your blog.

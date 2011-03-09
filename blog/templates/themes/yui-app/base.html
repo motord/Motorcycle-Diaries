@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>{% block title %} The O-Kay-Blog{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" />
+    <link rel="stylesheet" href="/media/themes/{{config.theme}}/css/yuiapp.css" type="text/css" />
+    <link id="theme" rel="stylesheet" href="/media/themes/{{config.theme}}/css/tan_blue.css" type="text/css" />
+    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>
+    <script src="/media/themes/{{config.theme}}/js/yuiapp.js" type="text/javascript"></script>
+</head>
+<body class="rounded">
+    <div id="doc3" class="yui-t6">
+
+        <div id="hd">
+            <h1><a href="/">{{config.blog_name}}</a></h1>
+            <div id="navigation">
+                <ul id="primary-navigation">
+                    <li class="active"><a href="/">Home</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b"><div class="yui-g">
+					{% block body %}{% endblock %}
+                </div></div>
+            </div>
+            <div id="sidebar" class="yui-b">
+
+                <!-- Sidebar block (same markup as basic block) -->
+                <div class="block">
+                    <div class="hd">
+                        <h2>Google Search</h2>
+                    </div>
+                    <div class="bd">
+					    <form id="quick-search" action="/search" method="get">
+					      <p>
+					        <label for="q">Search:</label>
+					        <input type="hidden" name="cref" value="http://{{config.host}}/cse.xml" />
+					        <input type="hidden" name="cof" value="FORID:11" />
+					        <input type="hidden" name="ie" value="UTF-8" />
+					        <input class="tbox" type="text" id="q" name="q" size="21" />
+					      </p>
+					    </form>
+						<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>					
+				     </div>	
+                </div>
+                <!-- Sidebars -->
+				{% for sidebar in config.sidebars %}
+                <div class="block">
+                    <div class="hd">
+                        <h2>{{sidebar[0]}}</h2>
+                    </div>
+                    <div class="bd">
+				          <ul class="biglist">
+							{% for entry in sidebar.1 %}
+				            <li><a href="{{entry[1]}}" title="{{entry[0]|e}}">{{entry[0]}}</a></li>
+							{% endfor %}
+				          </ul>
+                    </div>
+                </div>
+		        {% endfor %}
+
+                <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Strict" height="31" width="88" /></a></p>
+            </div>
+        </div>
+
+        <div id="ft">
+            <p class="inner">Copyright &copy; 2009 {{config.blog_name}}</p>
+        </div>
+
+    </div>
+</body>
+</html>
+
+

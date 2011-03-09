@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>{% block title %}OkayBlog{% endblock %}</title>
+	<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+	{% if config.blogcatalog %}
+  	<meta name="blogcatalog" content="{{config.blogcatalog}}" />	
+	{% endif %}
+  	<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />
+
+	{#
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/base/base-min.css" /> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/menu/assets/skins/sam/menu.css" /> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/button/assets/skins/sam/button.css" /> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/container/assets/skins/sam/container.css" /> 
+    #}
+
+	<!-- Combo-handled YUI CSS files: -->
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css&2.8.0r4/build/base/base-min.css&2.8.0r4/build/assets/skins/sam/skin.css">
+	<!-- Combo-handled YUI JS files: -->
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js&2.8.0r4/build/container/container-min.js&2.8.0r4/build/menu/menu-min.js&2.8.0r4/build/element/element-min.js&2.8.0r4/build/button/button-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/media/admin/css/style.css" />
+
+	{#
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script> 
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/container/container-min.js"></script> 
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/menu/menu-min.js"></script> 
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/button/button-min.js"></script> 
+	#}
+
+    {% block head %}{% endblock %}
+    <script type="text/javascript">
+
+	YAHOO.util.Event.onContentReady("sidebarmenu", function() {
+		var oSideBarMenu = new YAHOO.widget.Menu("sidebarmenu", {
+								position: "static"
+		});
+		oSideBarMenu.render();
+		oSideBarMenu.show();
+	});
+	
+	</script>
+
+</head>
+<body class="yui-skin-sam">
+<div id="wrap">	
+<div id="doc4" class="yui-t2 clearfix">
+   <div id="hd"> 
+	 <div id="header-block">	
+	 <h2>{{config.blog_name}}</h2>
+	 <h3>{{config.slogan}}</h3>
+	 </div> 
+   </div>
+   <div id="bd">
+		<div id="yui-main">
+			<div class="yui-b container">
+				<div class="yui-g main-content">
+				{% block body %}{% endblock %}
+				</div>
+			</div>
+		</div>
+		<div id="sidebar" class="yui-b container">
+			<div id="sidebarmenu" class="yuimenu">
+			    <div class="bd">
+					<h6>Admin</h6>
+		            <ul class="first-of-type">
+		                <li class="yuimenuitem">
+		                    <a class="yuimenuitemlabel" href="/">View Blog</a>
+		                </li>
+		                <li class="yuimenuitem">
+		                    <a class="yuimenuitemlabel" href="/admin/">View Posts</a>
+		                </li>
+		                <li class="yuimenuitem">
+		                    <a class="yuimenuitemlabel" href="/admin/newpost">New Post</a>
+		                </li>
+		            </ul>
+				    {% for sidebar in config.sidebars %}
+					<h6>{{ sidebar.0 }}</h6>
+			        <ul class="first-of-type">
+						{% for entry in sidebar.1 %}
+			            <li class="yuimenuitem">
+			                <a class="yuimenuitemlabel" href="{{entry[1]}}">
+			                    {{entry[0]}}
+			                </a>
+			            </li>
+						{% endfor %}
+			        </ul>            
+					{% endfor %}
+			    </div>
+			</div>	
+			<div id="otherlinks">&nbsp;</div>
+		</div>
+	</div>
+   	<div id="ft">
+	</div>
+</div>
+</div>
+<div id="footer-block">
+		<div class="hd">&nbsp;</div>
+		<div class="bd">
+			<p class="bottom-right" >
+				<a href="/">Home</a> |
+        <a href="/feeds/atom.xml">Atom</a> |
+				<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
+		   	<a href="http://validator.w3.org/check/referer">XHTML</a>
+			</p>			
+			<p class="bottom-left">			
+			The O-Kay-Blog admin interface created by : <a href="http://www.theokayblog.com/">Victor Goh</a>												
+			</p>	
+		</div>
+	</div>
+{% if config.analytics_id %}
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  try {
+  var pageTracker = _gat._getTracker("{{config.analytics_id}}");
+  pageTracker._trackPageview();
+  } catch(err) {}</script>
+{% endif %}
+</body>
+</html>

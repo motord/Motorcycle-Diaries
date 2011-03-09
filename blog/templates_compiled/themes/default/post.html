@@ -1,0 +1,70 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/themes/default/post.html'
+
+def root(context, environment=environment):
+    parent_template = None
+    l_config = context.resolve('config')
+    if 0: yield None
+    parent_template = environment.get_template(('blog/themes/%s/base.html' % environment.getattr(l_config, 'theme')), '/themes/default/post.html')
+    for name, parent_block in parent_template.blocks.iteritems():
+        context.blocks.setdefault(name, []).append(parent_block)
+    for event in parent_template.root_render_func(context):
+        yield event
+
+def block_body(context, environment=environment):
+    l_post = context.resolve('post')
+    l_config = context.resolve('config')
+    t_1 = environment.filters['date']
+    t_2 = environment.filters['safe']
+    t_3 = environment.filters['e']
+    t_4 = environment.filters['escape']
+    if 0: yield None
+    yield u'\n  <h2>%s</h2>\n    <p class="post-info">\n      Posted by %s\n      ' % (
+        escape(t_4(environment.getattr(l_post, 'title'))), 
+        escape(environment.getattr(l_config, 'author_name')), 
+    )
+    if environment.getattr(l_post, 'tags'):
+        if 0: yield None
+        yield u'\n        | Filed under\n        '
+        l_tag = missing
+        for l_tag, l_loop in LoopContext(environment.getattr(l_post, 'tag_pairs')):
+            if 0: yield None
+            yield u'\n          <a href="/tag/%s">%s</a>' % (
+                escape(t_3(environment.getitem(l_tag, 1))), 
+                escape(t_3(environment.getitem(l_tag, 0))), 
+            )
+            if (not environment.getattr(l_loop, 'last')):
+                if 0: yield None
+                yield u','
+            yield u'\n        '
+        l_tag = missing
+        yield u'\n      '
+    yield u'\n    </p>\n  %s\n  <p class="postmeta">\n    <span class="date">%s</span>\n  </p>\n  \n  ' % (
+        escape(t_2(environment.getattr(l_post, 'body'))), 
+        escape(t_1(environment.getattr(l_post, 'published'), '%d %B, %Y')), 
+    )
+    if environment.getattr(l_config, 'disqus_forum'):
+        if 0: yield None
+        yield u'\n    <h3 id="comments">Comments</h3>\n    <div id="disqus_thread"></div>\n    '
+        if environment.getattr(l_config, 'devel'):
+            if 0: yield None
+            yield u'\n      <script type="text/javascript">\n        disqus_developer = 1;\n      </script>\n    '
+        yield u'\n    <script type="text/javascript" src="http://disqus.com/forums/%s/embed.js"></script>\n    <noscript><a href="http://disqus.com/forums/%s/?url=ref">View the discussion thread.</a></noscript>\n    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>\n  ' % (
+            escape(environment.getattr(l_config, 'disqus_forum')), 
+            escape(environment.getattr(l_config, 'disqus_forum')), 
+        )
+    yield u'\n'
+
+def block_title(context, environment=environment):
+    l_post = context.resolve('post')
+    l_config = context.resolve('config')
+    t_4 = environment.filters['escape']
+    if 0: yield None
+    yield u'%s - %s' % (
+        escape(t_4(environment.getattr(l_post, 'title'))), 
+        escape(environment.getattr(l_config, 'blog_name')), 
+    )
+
+blocks = {'body': block_body, 'title': block_title}
+debug_info = '1=9&3=15&4=24&6=25&7=27&9=31&10=34&11=42&12=43&14=44&16=45&19=47&22=50&26=53&27=54&28=55&30=57&2=59'

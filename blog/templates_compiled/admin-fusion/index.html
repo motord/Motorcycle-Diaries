@@ -1,0 +1,82 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/admin-fusion/index.html'
+
+def root(context, environment=environment):
+    parent_template = None
+    if 0: yield None
+    parent_template = environment.get_template('blog/admin/base.html', '/admin-fusion/index.html')
+    for name, parent_block in parent_template.blocks.iteritems():
+        context.blocks.setdefault(name, []).append(parent_block)
+    for event in parent_template.root_render_func(context):
+        yield event
+
+def block_body(context, environment=environment):
+    l_count = context.resolve('count')
+    l_url_for = context.resolve('url_for')
+    l_posts = context.resolve('posts')
+    l_prev_offset = context.resolve('prev_offset')
+    l_next_offset = context.resolve('next_offset')
+    l_more_posts = context.resolve('more_posts')
+    l_offset = context.resolve('offset')
+    l_last_post = context.resolve('last_post')
+    t_1 = environment.filters['date']
+    t_2 = environment.filters['e']
+    if 0: yield None
+    yield u'\n  <h2>Admin: View All Posts</h2>\n  '
+    if l_last_post != -1:
+        if 0: yield None
+        yield u'\n    <p>Posts %s to %s</p>\n    <table>\n      <thead>\n\t<tr><th>Title</th><th>Published</th><th>Actions</th></tr>\n      </thead>\n\t  <tbody>\n      ' % (
+            escape((l_offset + 1)), 
+            escape((l_last_post + 1)), 
+        )
+        l_post = missing
+        l_url_for = context.resolve('url_for')
+        for l_post in l_posts:
+            if 0: yield None
+            yield u'\n        <tr>\n          <td><a href="%s">%s</a></td>\n          <td>' % (
+                escape(context.call(l_url_for, 'blog/post', post_id=context.call(environment.getattr(context.call(environment.getattr(l_post, 'key')), 'id')))), 
+                escape(t_2(environment.getattr(l_post, 'title'))), 
+            )
+            if environment.getattr(l_post, 'path'):
+                if 0: yield None
+                yield escape(t_1(environment.getattr(l_post, 'published'), '%d %B, %Y'))
+            else:
+                if 0: yield None
+                yield u'Draft'
+            yield u'</td>\n\t  <td>\n\t    '
+            if environment.getattr(l_post, 'path'):
+                if 0: yield None
+                yield u'\n\t      <a href="%s">View</a>\n\t      |\n\t    ' % (
+                    escape(environment.getattr(l_post, 'path')), 
+                )
+            yield u'\n\t\t<a href="%s">Edit</a>\n\t  </td>\n\t</tr>\n      ' % (
+                escape(context.call(l_url_for, 'blog/post', post_id=context.call(environment.getattr(context.call(environment.getattr(l_post, 'key')), 'id')))), 
+            )
+        l_post = missing
+        yield u'\n\t</tbody>\n    </table>\n  '
+    else:
+        if 0: yield None
+        yield u'\n    <p>\n      No posts yet.<br />\n      <a href="/admin/newpost">Write your first post.</a>\n    </p>\n  '
+    yield u'\n  <div class="navigation" id="pagenavi">\n  '
+    if l_offset != 0:
+        if 0: yield None
+        yield u'\n    <a id="btn_Prev" class="alignleft" href="%s">&lt; Previous</a>\n  ' % (
+            escape(context.call(l_url_for, 'blog/admin', start=l_prev_offset, count=l_count)), 
+        )
+    yield u'\n  '
+    if l_more_posts:
+        if 0: yield None
+        yield u'\n    <a id="btn_Next" class="alignright" href="%s">Next ></a>\n  ' % (
+            escape(context.call(l_url_for, 'blog/admin', start=l_next_offset, count=l_count)), 
+        )
+    yield u'\n  <div class="clear"></div>\n  </div>\n  <h2>Admin Actions</h2>\n  <form method="post" action="%s">\n\t<fieldset>\n    \t<input id="btn_Regen" type="submit" value="Regenerate all posts" />\n\t</fieldset>\n  </form>\n\n' % (
+        escape(context.call(l_url_for, 'blog/regenerate')), 
+    )
+
+def block_title(context, environment=environment):
+    if 0: yield None
+    yield u'Admin: View All Posts'
+
+blocks = {'body': block_body, 'title': block_title}
+debug_info = '1=8&3=14&5=27&6=30&12=35&14=38&15=41&17=48&18=51&20=53&21=54&24=57&27=60&32=61&34=62&35=65&36=67&37=68&38=71&39=73&43=74&2=77'

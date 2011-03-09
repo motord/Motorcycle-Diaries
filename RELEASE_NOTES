@@ -1,0 +1,28 @@
+theokayblog-0.1.0 - November 2, 2009
+====================================
+- Initial Release
+
+theokayblog-0.2.0 - November 4, 2009
+====================================
+- Moved css and image files from template sub-folder to media folder
+- Cleared config values. Please provide your own default.
+
+theokayblog-0.3.0 - November 11, 2009
+=====================================
+- Added fusion-xhtml theme from http://digitalnature.ro/projects/fusion/
+- Changed admin screens to use fusion-xhtml
+- Added YUI rich text editor for entering posts
+
+theokayblog-0.4.0 - November 12, 2009
+=====================================
+- Added new themes based on web-app-theme and yui-app-theme from github
+
+theokayblog-0.5.0 - November 13, 2009
+=====================================
+- Updated admin theme
+- Cleaned up themes
+
+theokayblog-0.6.0 - November 19, 2009
+=====================================
+- cleaned up admin themes
+- added html code editing option to YUI Rich Text Editor

@@ -1,0 +1,86 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/admin/index.html'
+
+def root(context, environment=environment):
+    parent_template = None
+    if 0: yield None
+    parent_template = environment.get_template('blog/admin/base.html', '/admin/index.html')
+    for name, parent_block in parent_template.blocks.iteritems():
+        context.blocks.setdefault(name, []).append(parent_block)
+    for event in parent_template.root_render_func(context):
+        yield event
+
+def block_body(context, environment=environment):
+    l_count = context.resolve('count')
+    l_url_for = context.resolve('url_for')
+    l_posts = context.resolve('posts')
+    l_prev_offset = context.resolve('prev_offset')
+    l_next_offset = context.resolve('next_offset')
+    l_more_posts = context.resolve('more_posts')
+    l_offset = context.resolve('offset')
+    l_last_post = context.resolve('last_post')
+    t_1 = environment.filters['date']
+    t_2 = environment.filters['e']
+    if 0: yield None
+    yield u'\n<div class="block">\n\t<div class="hd">\n  \t\t<h2>Admin: View All Posts</h2>\n\t</div>\n\t<div class="bd">\n\t  '
+    if l_last_post != -1:
+        if 0: yield None
+        yield u'\n\t    <p>Posts %s to %s</p>\n\t    <table>\n\t      <thead>\n\t\t\t<tr><td>Title</td><td>Published</td><td>Actions</td></tr>\n\t      </thead>\n\t\t  <tbody>\n\t      ' % (
+            escape((l_offset + 1)), 
+            escape((l_last_post + 1)), 
+        )
+        l_post = missing
+        l_url_for = context.resolve('url_for')
+        for l_post in l_posts:
+            if 0: yield None
+            yield u'\n\t        <tr>\n\t          <td><a href="%s">%s</a></td>\n\t          <td>' % (
+                escape(context.call(l_url_for, 'blog/post', post_id=context.call(environment.getattr(context.call(environment.getattr(l_post, 'key')), 'id')))), 
+                escape(t_2(environment.getattr(l_post, 'title'))), 
+            )
+            if environment.getattr(l_post, 'path'):
+                if 0: yield None
+                yield escape(t_1(environment.getattr(l_post, 'published'), '%d %B, %Y'))
+            else:
+                if 0: yield None
+                yield u'Draft'
+            yield u'</td>\n\t\t  <td>\n\t\t    '
+            if environment.getattr(l_post, 'path'):
+                if 0: yield None
+                yield u'\n\t\t      <a href="%s">View</a>\n\t\t      |\n\t\t    ' % (
+                    escape(environment.getattr(l_post, 'path')), 
+                )
+            yield u'\n\t\t\t<a href="%s">Edit</a>\n\t\t  </td>\n\t\t</tr>\n\t      ' % (
+                escape(context.call(l_url_for, 'blog/post', post_id=context.call(environment.getattr(context.call(environment.getattr(l_post, 'key')), 'id')))), 
+            )
+        l_post = missing
+        yield u'\n\t\t</tbody>\n\t    </table>\n\t  '
+    else:
+        if 0: yield None
+        yield u'\n\t    <p>\n\t      No posts yet.<br />\n\t      <a href="/admin/newpost">Write your first post.</a>\n\t    </p>\n\t  '
+    yield u'\n\t  '
+    if (l_offset != 0 or l_more_posts):
+        if 0: yield None
+        yield u'\n\t\t<ul class="pager">\n\t  '
+        if l_offset != 0:
+            if 0: yield None
+            yield u'\n\t\t\t<li><a id="btn_Prev" class="alignleft" href="%s">&lt; Previous</a></li>\n\t  ' % (
+                escape(context.call(l_url_for, 'blog/admin', start=l_prev_offset, count=l_count)), 
+            )
+        yield u'\n\t  '
+        if l_more_posts:
+            if 0: yield None
+            yield u'\n\t    \t<li><a id="btn_Next" class="alignright" href="%s">Next ></a></li>\n\t  ' % (
+                escape(context.call(l_url_for, 'blog/admin', start=l_next_offset, count=l_count)), 
+            )
+        yield u'\n\t   </ul>\n\t  '
+    yield u'\n\t</div>\n</div>\n<div class="block">\n\t<div class="hd">\n \t\t\t<h2>Admin Actions</h2>\n\t</div>\n\t<div class="bd">\n\t\t<form method="post" action="%s">\n\t\t\t<fieldset>\n\t\t\t  \t<input id="btn_Regen" type="submit" value="Regenerate all posts" />\n\t\t\t</fieldset>\n\t\t</form>\n\t</div>\n</div>\n' % (
+        escape(context.call(l_url_for, 'blog/regenerate')), 
+    )
+
+def block_title(context, environment=environment):
+    if 0: yield None
+    yield u'Admin: View All Posts'
+
+blocks = {'body': block_body, 'title': block_title}
+debug_info = '1=8&3=14&9=27&10=30&16=35&18=38&19=41&21=48&22=51&24=53&25=54&28=57&31=60&36=61&37=62&39=65&40=68&41=70&42=71&43=74&44=76&46=77&54=78&2=81'

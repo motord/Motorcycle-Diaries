@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GoogleCustomizations>
+  <CustomSearchEngine volunteers="false" visible="false" encoding="utf-8">
+    <Title>{{config.blog_name}}</Title>
+    <Description>{{config.slogan}}</Description>
+    <Context>
+      <BackgroundLabels>
+        <Label name="cse_include" mode="FILTER" />
+        <Label name="cse_exclude" mode="ELIMINATE" />
+      </BackgroundLabels>
+    </Context>
+    <LookAndFeel nonprofit="false" />
+    <AdSense>
+      <Client id="pub-7261119710100986">
+        <Channel id="8700025335"/>
+      </Client>
+    </AdSense>
+  </CustomSearchEngine>
+  <Annotations>
+    <Annotation about="http://{{config.host}}/*">
+      <Label name="cse_include" />
+    </Annotation>
+  </Annotations>
+</GoogleCustomizations>

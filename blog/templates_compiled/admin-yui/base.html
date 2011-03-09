@@ -1,0 +1,62 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/admin-yui/base.html'
+
+def root(context, environment=environment):
+    l_config = context.resolve('config')
+    if 0: yield None
+    yield u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'
+    for event in context.blocks['title'][0](context):
+        yield event
+    yield u'</title>\n\t<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />\n\t'
+    if environment.getattr(l_config, 'blogcatalog'):
+        if 0: yield None
+        yield u'\n  \t<meta name="blogcatalog" content="%s" />\t\n\t' % (
+            escape(environment.getattr(l_config, 'blogcatalog')), 
+        )
+    yield u'\n  \t<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />\n\n\t\n\n\t<!-- Combo-handled YUI CSS files: -->\n\t<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css&2.8.0r4/build/base/base-min.css&2.8.0r4/build/assets/skins/sam/skin.css">\n\t<!-- Combo-handled YUI JS files: -->\n\t<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js&2.8.0r4/build/container/container-min.js&2.8.0r4/build/menu/menu-min.js&2.8.0r4/build/element/element-min.js&2.8.0r4/build/button/button-min.js"></script>\n\t<link rel="stylesheet" type="text/css" href="/media/admin/css/style.css" />\n\n\t\n\n    '
+    for event in context.blocks['head'][0](context):
+        yield event
+    yield u'\n    <script type="text/javascript">\n\n\tYAHOO.util.Event.onContentReady("sidebarmenu", function() {\n\t\tvar oSideBarMenu = new YAHOO.widget.Menu("sidebarmenu", {\n\t\t\t\t\t\t\t\tposition: "static"\n\t\t});\n\t\toSideBarMenu.render();\n\t\toSideBarMenu.show();\n\t});\n\t\n\t</script>\n\n</head>\n<body class="yui-skin-sam">\n<div id="wrap">\t\n<div id="doc4" class="yui-t2 clearfix">\n   <div id="hd"> \n\t <div id="header-block">\t\n\t <h2>%s</h2>\n\t <h3>%s</h3>\n\t </div> \n   </div>\n   <div id="bd">\n\t\t<div id="yui-main">\n\t\t\t<div class="yui-b container">\n\t\t\t\t<div class="yui-g main-content">\n\t\t\t\t' % (
+        escape(environment.getattr(l_config, 'blog_name')), 
+        escape(environment.getattr(l_config, 'slogan')), 
+    )
+    for event in context.blocks['body'][0](context):
+        yield event
+    yield u'\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div id="sidebar" class="yui-b container">\n\t\t\t<div id="sidebarmenu" class="yuimenu">\n\t\t\t    <div class="bd">\n\t\t\t\t\t<h6>Admin</h6>\n\t\t            <ul class="first-of-type">\n\t\t                <li class="yuimenuitem">\n\t\t                    <a class="yuimenuitemlabel" href="/">View Blog</a>\n\t\t                </li>\n\t\t                <li class="yuimenuitem">\n\t\t                    <a class="yuimenuitemlabel" href="/admin/">View Posts</a>\n\t\t                </li>\n\t\t                <li class="yuimenuitem">\n\t\t                    <a class="yuimenuitemlabel" href="/admin/newpost">New Post</a>\n\t\t                </li>\n\t\t            </ul>\n\t\t\t\t    '
+    l_sidebar = missing
+    for l_sidebar in environment.getattr(l_config, 'sidebars'):
+        if 0: yield None
+        yield u'\n\t\t\t\t\t<h6>%s</h6>\n\t\t\t        <ul class="first-of-type">\n\t\t\t\t\t\t' % (
+            escape(environment.getitem(l_sidebar, 0)), 
+        )
+        l_entry = missing
+        for l_entry in environment.getitem(l_sidebar, 1):
+            if 0: yield None
+            yield u'\n\t\t\t            <li class="yuimenuitem">\n\t\t\t                <a class="yuimenuitemlabel" href="%s">\n\t\t\t                    %s\n\t\t\t                </a>\n\t\t\t            </li>\n\t\t\t\t\t\t' % (
+                escape(environment.getitem(l_entry, 1)), 
+                escape(environment.getitem(l_entry, 0)), 
+            )
+        l_entry = missing
+        yield u'\n\t\t\t        </ul>            \n\t\t\t\t\t'
+    l_sidebar = missing
+    yield u'\n\t\t\t    </div>\n\t\t\t</div>\t\n\t\t\t<div id="otherlinks">&nbsp;</div>\n\t\t</div>\n\t</div>\n   \t<div id="ft">\n\t</div>\n</div>\n</div>\n<div id="footer-block">\n\t\t<div class="hd">&nbsp;</div>\n\t\t<div class="bd">\n\t\t\t<p class="bottom-right" >\n\t\t\t\t<a href="/">Home</a> |\n        <a href="/feeds/atom.xml">Atom</a> |\n\t\t\t\t<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | \n\t\t   \t<a href="http://validator.w3.org/check/referer">XHTML</a>\n\t\t\t</p>\t\t\t\n\t\t\t<p class="bottom-left">\t\t\t\n\t\t\tThe O-Kay-Blog admin interface created by : <a href="http://www.theokayblog.com/">Victor Goh</a>\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t</p>\t\n\t\t</div>\n\t</div>\n'
+    if environment.getattr(l_config, 'analytics_id'):
+        if 0: yield None
+        yield u'\n  <script type="text/javascript">\n  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n  document.write(unescape("%%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%%3E%%3C/script%%3E"));\n  </script>\n  <script type="text/javascript">\n  try {\n  var pageTracker = _gat._getTracker("%s");\n  pageTracker._trackPageview();\n  } catch(err) {}</script>\n' % (
+            escape(environment.getattr(l_config, 'analytics_id')), 
+        )
+    yield u'\n</body>\n</html>'
+
+def block_body(context, environment=environment):
+    if 0: yield None
+
+def block_head(context, environment=environment):
+    if 0: yield None
+
+def block_title(context, environment=environment):
+    if 0: yield None
+    yield u'OkayBlog'
+
+blocks = {'body': block_body, 'head': block_head, 'title': block_title}
+debug_info = '1=8&4=9&6=12&7=15&8=17&33=18&52=21&53=22&60=24&79=28&80=31&82=34&84=37&85=38&88=41&90=43&114=44&121=47&124=49&60=51&33=54&4=57'

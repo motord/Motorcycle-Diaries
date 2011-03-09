@@ -1,0 +1,49 @@
+{% extends "blog/admin/base.html" %}
+{% block title %}Admin: {% if edit %}Edit{% else %}New{% endif %} Post{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/editor/assets/skins/sam/editor.css" /> 
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.0r4/build/editor/editor-min.js"></script> 
+{% endblock %}
+
+{% block body %}
+<h2>Admin: {% if edit %}Edit Existing {% else %}Create New{% endif %} Post</h2>
+{% call form() %}
+<dl>
+    <dt>{{ form.title.label()|safe }} {{ form.title.errors()|safe }}</dt>
+    <dd>{{ form.title.render()|safe }}</dd>
+    <dt>{{ form.body.label()|safe }} {{ form.body.errors()|safe }}</dt>
+    <dd>{{ form.body.render()|safe }}</dd>
+    <dt>{{ form.tags.label()|safe }} {{ form.tags.errors()|safe }}</dt>
+    <dd>{{ form.tags.render()|safe }}</dd>
+    <dt>{{ form.draft.label()|safe }} {{ form.draft.render()|safe }} {{ form.draft.errors()|safe }}</dt>
+	<dt>&nbsp;</dt>
+	<div class="actions"><input id="btn_submit" type="submit" value="Submit" /></div>
+{% endcall %}
+ 
+<script type="text/javascript"> 
+ 
+(function() {
+    var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event;
+    
+    var myConfig = {
+        height: '200px',
+        width: '600px',
+        dompath: true,
+		handleSubmit: true,
+		autoHeight: true,
+		markup: 'xhtml',
+		ptags: true,
+    };
+ 
+    var myEditor = new YAHOO.widget.Editor('f_body', myConfig);
+    myEditor.render();
+ 
+})();
+
+var oSubmitBtn = new YAHOO.widget.Button('btn_submit');
+</script> 
+ 
+{% endblock %}
+
+ 

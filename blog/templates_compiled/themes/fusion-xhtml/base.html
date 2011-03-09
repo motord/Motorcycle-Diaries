@@ -1,0 +1,77 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/themes/fusion-xhtml/base.html'
+
+def root(context, environment=environment):
+    l_config = context.resolve('config')
+    t_1 = environment.filters['e']
+    if 0: yield None
+    yield u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">\n <head>\n    <title>'
+    for event in context.blocks['title'][0](context):
+        yield event
+    yield u'</title>\n    <meta name="keywords" content="the-okay-blog" />\n    <meta name="description" content="%s" />\n    <link rel="pingback" href="http://%s" />\n\t' % (
+        escape(t_1(environment.getattr(l_config, 'slogan'))), 
+        escape(environment.getattr(l_config, 'host')), 
+    )
+    if environment.getattr(l_config, 'blogcatalog'):
+        if 0: yield None
+        yield u'\n\t<meta name="blogcatalog" content="%s" />\n\t' % (
+            escape(environment.getattr(l_config, 'blogcatalog')), 
+        )
+    yield u'\n\t<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />\n\t'
+    for event in context.blocks['head'][0](context):
+        yield event
+    yield u'\n    <style type="text/css" media="all">\n     @import "/media/themes/%s/css/style.css";\n    </style>\n    <!--[if lte IE 6]>\n    <script type="text/javascript">\n    /* <![CDATA[ */\n       blankimgpath = \'/media/themes/%s/images/blank.gif\';\n     /* ]]> */\n    </script>\n\n    <style type="text/css" media="screen">\n      @import "ie6.css";\n      body{ behavior:url("/media/themes/%s/ie6hoverfix.htc"); }\n      img{ behavior: url("/media/themes/%s/ie6pngfix.htc"); }\n    </style>\n    <![endif]-->\n\n    <script src="/media/themes/%s/js/jquery.js" type="text/javascript"></script>\n    <script src="/media/themes/%s/js/fusion.js" type="text/javascript"></script>\n\n    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>\n </head>\n <body class="home">\n  <!-- page wrappers (100%% width) -->\n  <div id="page-wrap1">\n    <div id="page-wrap2">\n      <!-- page (actual site content, custom width) -->\n      <div id="page" class="with-sidebar">\n\n       <!-- main wrapper (side & main) -->\n       <div id="main-wrap">\n        <!-- mid column wrap -->\n    \t<div id="mid-wrap">\n         <!-- sidebar wrap -->\n         <div id="side-wrap">\n          <!-- mid column -->\n    \t  <div id="mid">\n            <!-- header -->\n            <div id="header">\n\n              <div id="topnav"><p>%s</p></div>\n              <h1 id="logo"><a href="/">%s</a></h1>\n\n              <!-- top tab navigation -->\n              <div id="tabs">\n                <ul>\n                  <li><a href="/" class="active"><span><span>Home</span></span></a></li>\n                </ul>\n              </div>\n              <!-- /top tabs -->\n\n            </div><!-- /header -->\n\n            <!-- mid content -->\n            <div id="mid-content">\n              \t' % (
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(environment.getattr(l_config, 'theme')), 
+        escape(t_1(environment.getattr(l_config, 'slogan'))), 
+        escape(t_1(environment.getattr(l_config, 'blog_name'))), 
+    )
+    for event in context.blocks['body'][0](context):
+        yield event
+    yield u'\n            </div>\n            <!-- /mid content -->\n          </div>\n          <!-- /mid -->\n\n          <!-- sidebar -->\n          <div id="sidebar">\n           <!-- sidebar 1st container -->\n          <div id="sidebar-wrap1">\n            <!-- sidebar 2nd container -->\n            <div id="sidebar-wrap2">\n\t\t\t  <ul id="sidelist">\n\t\t        <li> \n\t\t         <!-- google search form --> \n\t\t          <div id="googlesearch"> \n\t\t\t\t    <form id="quick-search" action="/search" method="get">\n\t\t\t\t      <p>\n\t\t\t\t        <label for="q">Search:</label>\n\t\t\t\t        <input type="hidden" name="cref" value="http://%s/cse.xml" />\n\t\t\t\t        <input type="hidden" name="cof" value="FORID:11" />\n\t\t\t\t        <input type="hidden" name="ie" value="UTF-8" />\n\t\t\t\t        <input class="tbox" type="text" id="q" name="q" size="21" />\n\t\t\t\t      </p>\n\t\t\t\t    </form>\n   \t\t\t\t\t<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>\t\t\t\t\t\n\t\t          </div>\n\t\t \t\t  <div>&nbsp;</div>\n\t\t         <!-- /google search form --> \n\t\t        </li> \n\t\t\t\t<li>\n\t\t\t\t\t<ul class="nav">\n\t\t\t\t      ' % (
+        escape(environment.getattr(l_config, 'host')), 
+    )
+    l_sidebar = missing
+    for l_sidebar in environment.getattr(l_config, 'sidebars'):
+        if 0: yield None
+        yield u'\n\t\t\t\t\t\t<!-- linkcat-->\n\t\t\t\t\t\t<li class="cat-item"><h2>%s</h2>\n\t\t\t\t          <ul>\n\t\t\t\t            ' % (
+            escape(environment.getitem(l_sidebar, 0)), 
+        )
+        l_entry = missing
+        for l_entry in environment.getitem(l_sidebar, 1):
+            if 0: yield None
+            yield u'\n\t\t\t\t              <li class="cat-item"><a href="%s" title="%s">%s</a></li>\n\t\t\t\t            ' % (
+                escape(environment.getitem(l_entry, 1)), 
+                escape(t_1(environment.getitem(l_entry, 0))), 
+                escape(environment.getitem(l_entry, 0)), 
+            )
+        l_entry = missing
+        yield u'\n\t\t\t\t          </ul>\n\t\t\t\t\t\t</li>\n\t\t\t\t      '
+    l_sidebar = missing
+    yield u' \n\t\t\t\t\t</ul>\n\t\t\t\t</li> \n\t\t  \t  </ul>    \t\n\t\t    </div>\n            <!-- /sidebar 2nd container -->\n           </div>\n           <!-- /sidebar 1st container -->\n          </div>\n          <!-- /sidebar -->\n         </div>\n         <!-- /side wrap -->\n        </div>\n        <!-- /mid column wrap -->\n       </div>\n       <!-- /main wrapper -->\n\n       <!-- clear main & sidebar sections -->\n       <div class="clearcontent"></div>\n       <!-- /clear main & sidebar sections -->\n\n       <!-- footer -->\n       <div id="footer">\n\t\t\t<p id="ok_logo"><a href="http://www.theokayblog.com"><img src="/media/themes/%s/ok_logo_tiny.jpg" alt="Powered by the O-Kay-Blog" /></a></p>\n\t\t\t<p class="small">Powered by <a href="http://www.theokayblog.com">The O-Kay Blog</a> and <a href="http://appengine.google.com">Google App Engine</a></p>\n\t\t\t<p class="small">\t\t\t\n\t\t\tBlog design modified by <a href="http://www.theokayblog.com">Victor Goh</a> from original design by <a href="http://digitalnature.ro/">DigitalNature</a>\n\t\t\t</p>\t\n\t\t\t<p>\n\t\t\t\t<a href="/">Home</a> |\n        \t\t<a href="/feeds/atom.xml">Atom</a> |\n\t\t\t\t<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | \n\t\t   \t\t<a href="http://validator.w3.org/check/referer">XHTML</a>\n\t\t\t</p>\n       </div>\n       <!-- /footer -->\n\n       <!-- layout controls -->\n       <div id="layoutcontrol">\n         <a href="javascript:void(0);" class="setFont" title="Increase/Decrease text size"><span>SetTextSize</span></a>\n         <a href="javascript:void(0);" class="setLiquid" title="Switch between full and fixed width"><span>SetPageWidth</span></a>\n       </div>\n       <!-- /layout controls -->\n      </div>\n      <!-- /page -->\n\n     </div>\n  </div>\n  <!-- /page wrappers -->\n' % (
+        escape(environment.getattr(l_config, 'theme')), 
+    )
+    if environment.getattr(l_config, 'analytics_id'):
+        if 0: yield None
+        yield u'\n  <script type="text/javascript">\n  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");\n  document.write(unescape("%%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%%3E%%3C/script%%3E"));\n  </script>\n  <script type="text/javascript">\n  try {\n  var pageTracker = _gat._getTracker("%s");\n  pageTracker._trackPageview();\n  } catch(err) {}</script>\n' % (
+            escape(environment.getattr(l_config, 'analytics_id')), 
+        )
+    yield u'\n </body>\n</html>\n\n'
+
+def block_body(context, environment=environment):
+    if 0: yield None
+
+def block_head(context, environment=environment):
+    if 0: yield None
+
+def block_title(context, environment=environment):
+    if 0: yield None
+    yield u' The O-Kay-Blog'
+
+blocks = {'body': block_body, 'head': block_head, 'title': block_title}
+debug_info = '1=9&4=10&6=13&7=14&8=16&9=19&10=21&12=22&14=25&19=26&25=27&26=28&30=29&31=30&53=31&54=32&68=34&87=37&100=40&102=43&104=46&105=49&106=54&109=56&132=57&158=59&165=62&168=64&68=66&12=69&4=72'

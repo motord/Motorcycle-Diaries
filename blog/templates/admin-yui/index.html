@@ -1,0 +1,54 @@
+{% extends "blog/admin/base.html" %}
+{% block title %}Admin: All Posts{% endblock %}
+{% block body %}
+  <h2>Admin: All Posts</h2>
+  {% if last_post != -1 %}
+    <p>Posts {{offset + 1}} to {{last_post + 1}}</p>
+    <table>
+      <thead>
+	<tr><th>Title</th><th>Published</th><th>Actions</th></tr>
+      </thead>
+      {% for post in posts %}
+        <tr>
+          <td><a href="{{ url_for('blog/post', post_id=post.key().id()) }}">{{post.title|e}}</a></td>
+          <td>{% if post.path %}{{post.published|date("%Y-%m-%d")}}{% else %}Draft{% endif %}</td>
+	  <td>
+	    {% if post.path %}
+	      <a href="{{post.path}}">View</a>
+	      |
+	    {% endif %}
+		<a href="{{ url_for('blog/post', post_id=post.key().id()) }}">Edit</a>
+	  </td>
+	</tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>
+      No posts yet.<br />
+      <a href="/admin/newpost">Write your first post.</a>
+    </p>
+  {% endif %}
+  {% if offset != 0 %}
+    <a id="btn_Prev" href="{{ url_for('blog/admin', start=prev_offset, count=count) }}">&lt; Previous</a>
+	<script type="text/javascript">
+		var oPrevBtn = new YAHOO.widget.Button('btn_Prev')
+	</script>
+  {% endif %}
+  {% if more_posts %}
+    <a id="btn_Next" href="{{ url_for('blog/admin', start=next_offset, count=count) }}">Next ></a>
+	<script type="text/javascript">
+		var oNextBtn = new YAHOO.widget.Button('btn_Next')
+	</script>
+  {% endif %}
+
+  <h2>Admin Actions</h2>
+  <form method="post" action="{{ url_for('blog/regenerate') }}">
+	<fieldset>
+    	<input id="btn_Regen" type="submit" value="Regenerate all posts" />
+	</fieldset>
+  </form>
+	<script type="text/javascript">
+		var oRegenBtn = new YAHOO.widget.Button('btn_Regen')
+	</script>
+
+{% endblock %}

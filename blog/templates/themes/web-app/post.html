@@ -1,0 +1,34 @@
+{% extends "blog/themes/%s/base.html" % config.theme %}
+{% block title %}{{post.title|e}} - {{config.blog_name|e}}{% endblock %}
+{% block body %}
+<div id="box">
+<div class="block">
+	<h2>{{post.title|e}}</h2>
+	<div class="clear"></div>
+    <div class="content">
+		<div class="inner">
+			<p>
+				<span class="post-meta">Posted by {{config.author_name|e}} on {{post.published|date("%d %B, %Y")}}</span>
+			</p>
+			<div class="clear"></div>
+			{{post.body|safe}}
+			<p>Tags: {% for tag in post.tag_pairs %}
+			  <a href="/tag/{{tag[1]|e}}" rel="tag">{{tag[0]|e}}</a>{% if not loop.last %},{% endif %}
+			{% endfor %}</p>
+			{% if config.disqus_forum %}
+			  <h3 id="comments">Comments</h3>
+			  <div id="disqus_thread"></div>
+			  {% if config.devel %}
+			    <script type="text/javascript">
+			      disqus_developer = 1;
+			    </script>
+			  {% endif %}
+			  <script type="text/javascript" src="http://disqus.com/forums/{{config.disqus_forum}}/embed.js"></script>
+			  <noscript><a href="http://disqus.com/forums/{{config.disqus_forum}}/?url=ref">View the discussion thread.</a></noscript>
+			  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

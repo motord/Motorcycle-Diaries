@@ -1,0 +1,61 @@
+{% extends "blog/admin/base.html" %}
+{% block title %}Admin: View All Posts{% endblock %}
+{% block body %}
+<div class="block">
+	<div class="hd">
+  		<h2>Admin: View All Posts</h2>
+	</div>
+	<div class="bd">
+	  {% if last_post != -1 %}
+	    <p>Posts {{offset + 1}} to {{last_post + 1}}</p>
+	    <table>
+	      <thead>
+			<tr><td>Title</td><td>Published</td><td>Actions</td></tr>
+	      </thead>
+		  <tbody>
+	      {% for post in posts %}
+	        <tr>
+	          <td><a href="{{ url_for('blog/post', post_id=post.key().id()) }}">{{post.title|e}}</a></td>
+	          <td>{% if post.path %}{{post.published|date("%d %B, %Y")}}{% else %}Draft{% endif %}</td>
+		  <td>
+		    {% if post.path %}
+		      <a href="{{post.path}}">View</a>
+		      |
+		    {% endif %}
+			<a href="{{ url_for('blog/post', post_id=post.key().id()) }}">Edit</a>
+		  </td>
+		</tr>
+	      {% endfor %}
+		</tbody>
+	    </table>
+	  {% else %}
+	    <p>
+	      No posts yet.<br />
+	      <a href="/admin/newpost">Write your first post.</a>
+	    </p>
+	  {% endif %}
+	  {% if offset != 0 or more_posts %}
+		<ul class="pager">
+	  {% if offset != 0 %}
+			<li><a id="btn_Prev" class="alignleft" href="{{ url_for('blog/admin', start=prev_offset, count=count) }}">&lt; Previous</a></li>
+	  {% endif %}
+	  {% if more_posts %}
+	    	<li><a id="btn_Next" class="alignright" href="{{ url_for('blog/admin', start=next_offset, count=count) }}">Next ></a></li>
+	  {% endif %}
+	   </ul>
+	  {% endif %}
+	</div>
+</div>
+<div class="block">
+	<div class="hd">
+ 			<h2>Admin Actions</h2>
+	</div>
+	<div class="bd">
+		<form method="post" action="{{ url_for('blog/regenerate') }}">
+			<fieldset>
+			  	<input id="btn_Regen" type="submit" value="Regenerate all posts" />
+			</fieldset>
+		</form>
+	</div>
+</div>
+{% endblock %}

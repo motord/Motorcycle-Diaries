@@ -1,0 +1,13 @@
+from __future__ import division
+from jinja2.runtime import LoopContext, TemplateReference, Macro, Markup, TemplateRuntimeError, missing, concat, escape, markup_join, unicode_join, to_string, TemplateNotFound
+name = '/robots.txt'
+
+def root(context, environment=environment):
+    l_config = context.resolve('config')
+    if 0: yield None
+    yield u'Sitemap: http://%s/sitemap.xml' % (
+        escape(environment.getattr(l_config, 'host')), 
+    )
+
+blocks = {}
+debug_info = '1=8'
