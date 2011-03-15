@@ -21,7 +21,7 @@ def root(context, environment=environment):
     yield u'\n\t<link rel="alternate" type="application/atom+xml" href="/feeds/atom.xml" />\n\t'
     for event in context.blocks['head'][0](context):
         yield event
-    yield u'\n    <style type="text/css" media="all">\n     @import "/media/themes/%s/css/style.css";\n    </style>\n    <!--[if lte IE 6]>\n    <script type="text/javascript">\n    /* <![CDATA[ */\n       blankimgpath = \'/media/themes/%s/images/blank.gif\';\n     /* ]]> */\n    </script>\n\n    <style type="text/css" media="screen">\n      @import "ie6.css";\n      body{ behavior:url("/media/themes/%s/ie6hoverfix.htc"); }\n      img{ behavior: url("/media/themes/%s/ie6pngfix.htc"); }\n    </style>\n    <![endif]-->\n\n    <script src="/media/themes/%s/js/jquery.js" type="text/javascript"></script>\n    <script src="/media/themes/%s/js/fusion.js" type="text/javascript"></script>\n\n    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>\n </head>\n <body class="home">\n  <!-- page wrappers (100%% width) -->\n  <div id="page-wrap1">\n    <div id="page-wrap2">\n      <!-- page (actual site content, custom width) -->\n      <div id="page" class="with-sidebar">\n\n       <!-- main wrapper (side & main) -->\n       <div id="main-wrap">\n        <!-- mid column wrap -->\n    \t<div id="mid-wrap">\n         <!-- sidebar wrap -->\n         <div id="side-wrap">\n          <!-- mid column -->\n    \t  <div id="mid">\n            <!-- header -->\n            <div id="header">\n\n              <div id="topnav"><p>%s</p></div>\n              <h1 id="logo"><a href="/">%s</a></h1>\n\n              <!-- top tab navigation -->\n              <div id="tabs">\n                <ul>\n                  <li><a href="/" class="active"><span><span>Home</span></span></a></li>\n                </ul>\n              </div>\n              <!-- /top tabs -->\n\n            </div><!-- /header -->\n\n            <!-- mid content -->\n            <div id="mid-content">\n              \t' % (
+    yield u'\n    <style type="text/css" media="all">\n     @import "/media/themes/%s/css/style.css";\n    </style>\n    <!--[if lte IE 6]>\n    <script type="text/javascript">\n    /* <![CDATA[ */\n       blankimgpath = \'/media/themes/%s/images/blank.gif\';\n     /* ]]> */\n    </script>\n\n    <style type="text/css" media="screen">\n      @import "ie6.css";\n      body{ behavior:url("/media/themes/%s/ie6hoverfix.htc"); }\n      img{ behavior: url("/media/themes/%s/ie6pngfix.htc"); }\n    </style>\n    <![endif]-->\n\n    <script src="/media/themes/%s/js/jquery.js" type="text/javascript"></script>\n    <script src="/media/themes/%s/js/fusion.js" type="text/javascript"></script>\n\n    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>\n </head>\n <body class="home">\n  <!-- page wrappers (100%% width) -->\n  <div id="page-wrap1">\n    <div id="page-wrap2">\n      <!-- page (actual site content, custom width) -->\n      <div id="page" class="with-sidebar">\n\n       <!-- main wrapper (side & main) -->\n       <div id="main-wrap">\n        <!-- mid column wrap -->\n    \t<div id="mid-wrap">\n         <!-- sidebar wrap -->\n         <div id="side-wrap">\n          <!-- mid column -->\n    \t  <div id="mid">\n            <!-- header -->\n            <div id="header">\n\n              <div id="topnav"><p>%s</p></div>\n              <h1 id="logo"><a href="/">%s</a></h1>\n\n              <!-- top tab navigation -->\n              <div id="tabs">\n                <ul>\n\t\t ' % (
         escape(environment.getattr(l_config, 'theme')), 
         escape(environment.getattr(l_config, 'theme')), 
         escape(environment.getattr(l_config, 'theme')), 
@@ -31,6 +31,9 @@ def root(context, environment=environment):
         escape(t_1(environment.getattr(l_config, 'slogan'))), 
         escape(t_1(environment.getattr(l_config, 'blog_name'))), 
     )
+    for event in context.blocks['toptabnav'][0](context):
+        yield event
+    yield u'\n                </ul>\n              </div>\n              <!-- /top tabs -->\n\n            </div><!-- /header -->\n\n            <!-- mid content -->\n            <div id="mid-content">\n              \t'
     for event in context.blocks['body'][0](context):
         yield event
     yield u'\n            </div>\n            <!-- /mid content -->\n          </div>\n          <!-- /mid -->\n\n          <!-- sidebar -->\n          <div id="sidebar">\n           <!-- sidebar 1st container -->\n          <div id="sidebar-wrap1">\n            <!-- sidebar 2nd container -->\n            <div id="sidebar-wrap2">\n\t\t\t  <ul id="sidelist">\n\t\t        <li> \n\t\t         <!-- google search form --> \n\t\t          <div id="googlesearch"> \n\t\t\t\t    <form id="quick-search" action="/search" method="get">\n\t\t\t\t      <p>\n\t\t\t\t        <label for="q">Search:</label>\n\t\t\t\t        <input type="hidden" name="cref" value="http://%s/cse.xml" />\n\t\t\t\t        <input type="hidden" name="cof" value="FORID:11" />\n\t\t\t\t        <input type="hidden" name="ie" value="UTF-8" />\n\t\t\t\t        <input class="tbox" type="text" id="q" name="q" size="21" />\n\t\t\t\t      </p>\n\t\t\t\t    </form>\n   \t\t\t\t\t<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=quick-search&amp;lang=en"></script>\t\t\t\t\t\n\t\t          </div>\n\t\t \t\t  <div>&nbsp;</div>\n\t\t         <!-- /google search form --> \n\t\t        </li> \n\t\t\t\t<li>\n\t\t\t\t\t<ul class="nav">\n\t\t\t\t      ' % (
@@ -70,6 +73,10 @@ def root(context, environment=environment):
         )
     yield u'\n </body>\n</html>\n\n'
 
+def block_toptabnav(context, environment=environment):
+    if 0: yield None
+    yield u'\n                  <li><a href="/" class="active"><span><span>Home</span></span></a></li>\n                  <li><a href="/chronicle"><span><span>\u6b63\u53d9</span></span></a></li>\n\t\t '
+
 def block_body(context, environment=environment):
     if 0: yield None
 
@@ -80,5 +87,5 @@ def block_title(context, environment=environment):
     if 0: yield None
     yield u' The O-Kay-Blog'
 
-blocks = {'body': block_body, 'head': block_head, 'title': block_title}
-debug_info = '1=9&4=10&6=13&7=14&8=16&9=19&10=21&12=22&14=25&19=26&25=27&26=28&30=29&31=30&53=31&54=32&68=34&87=37&100=40&102=43&104=46&105=49&106=54&109=56&112=57&114=60&116=63&137=64&163=66&170=69&173=71&68=73&12=76&4=79'
+blocks = {'toptabnav': block_toptabnav, 'body': block_body, 'head': block_head, 'title': block_title}
+debug_info = '1=9&4=10&6=13&7=14&8=16&9=19&10=21&12=22&14=25&19=26&25=27&26=28&30=29&31=30&53=31&54=32&59=34&62=36&71=37&90=40&103=43&105=46&107=49&108=52&109=57&112=59&115=60&117=63&119=66&140=67&166=69&173=72&176=74&59=76&71=80&12=83&4=86'
