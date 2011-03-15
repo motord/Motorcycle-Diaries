@@ -44,6 +44,15 @@ analytics_id = 'UA-7265938-12'
 # A nested list of sidebar menus, for convenience. If this isn't versatile
 # enough, you can edit themes/default/base.html instead.
 sidebars = [
+  (u'You can help me!', [
+  (u'Dropbox Invite', 'http://db.tt/e51caZn'),
+  (u'微盘邀请', 'http://vdisk.me/?a=login&code=000qqq&uid=172577#register'),
+  (u'美团邀请', 'http://www.meituan.com/r/i13085'),
+  (u'拉手邀请', 'http://www.lashou.com/?inviter=i6LW15bee'),
+  (u'糯米邀请', 'http://www.nuomi.com/i/2pwqnZnpB'),
+  (u'满座邀请', 'http://www.manzuo.com/i/67932.htm'),
+  (u'初刻CRUCCO-中国城市主流青年 慢时尚生活品牌', 'http://www.crucco.com?source=motor'),
+  ]),
   (u'Blogroll', [
   (u'我的链路', 'http://lian.lu/motor'),
   (u'The O-Kay-Blog Home', 'http://www.theokayblog.com'),

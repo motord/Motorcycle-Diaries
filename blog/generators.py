@@ -139,6 +139,51 @@ class IndexContentGenerator(ListingContentGenerator):
         return [u"index"]
 generator_list.append(IndexContentGenerator)
 
+class ChronicleContentGenerator(ListingContentGenerator):
+    """ContentGenerator for chronicle listing of the blog and archive pages."""
+    path = '/chronicle/page/%(pagenum)d'
+    first_page_path = '/chronicle'
+    
+    @classmethod
+    def generate_resource(cls, post, resource, pagenum=1, start_ts=None):
+        from blog.models import BlogPost
+        q = BlogPost.all().order('published')
+        q.filter('published >', start_ts or datetime.datetime.min)
+        cls._filter_query(resource, q)
+
+        posts = q.fetch(config.posts_per_page + 1)
+        more_posts = len(posts) > config.posts_per_page
+
+        path_args = {
+            'resource': resource,
+        }
+        path_args['pagenum'] = pagenum - 1
+        prev_page = cls.path % path_args
+        path_args['pagenum'] = pagenum + 1
+        next_page = cls.path % path_args
+        template_vals = {
+            'posts': posts[:config.posts_per_page],
+            'prev_page': prev_page if pagenum > 1 else None,
+            'next_page': next_page if more_posts else None,
+            'config': config,
+        }
+        template_name = "blog/themes/%s/chronicle.html" % config.theme
+        rendered = utils.render_template(template_name, template_vals)
+        
+        path_args['pagenum'] = pagenum
+        StaticContent.set(cls.path % path_args, rendered, config.html_mime_type)
+
+        if pagenum == 1:
+            StaticContent.set(cls.first_page_path % path_args, rendered, config.html_mime_type)
+        if more_posts:
+            deferred.defer(cls.generate_resource, None, resource, pagenum + 1,
+                           posts[-2].published)
+
+    @classmethod
+    def get_resource_list(cls, post):
+        return [u"chronicle"]
+generator_list.append(ChronicleContentGenerator)
+
 class TagContentGenerator(ListingContentGenerator):
     """ContentGenerator for the tags pages."""
     path = '/tag/%(resource)s/%(pagenum)d'

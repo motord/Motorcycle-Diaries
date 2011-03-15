@@ -24,7 +24,7 @@ HTTP_DATE_FMT = "%a, %d %b %Y %H:%M:%S GMT"
 
 from google.appengine.ext import db
 from google.appengine.ext import deferred
-from google.appengine.api.labs import taskqueue
+from google.appengine.api import taskqueue
 
 from kay.utils import (
     render_to_response, reverse,
