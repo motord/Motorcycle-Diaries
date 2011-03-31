@@ -9,10 +9,10 @@ The-O-Kay-Blog configuration settings
 import os
 
 blog_name = u'Motorcycle Diaries'
-slogan = u'2012年上海到拉萨，行吗？'
+slogan = u'2012年从上海骑摩托车到拉萨，行吗？'
 author_name = u'赵州'
 
-host = 'sapphire.samdeha.com'
+host = 'md.samdeha.com'
 
 # Themes are located in the blog/templates/themes subfolder
 theme = 'motorcycle-xhtml'
@@ -59,6 +59,7 @@ sidebars = [
   (u'The Bloggart', 'http://blog.notdot.net/2009/10/Writing-a-blog-system-on-App-Engine'),
   ]),
   (u'Projects and Codes', [
+  (u'CloudSaveYG云归', 'https://github.com/motord/cloudsaveYG'), 
   (u'The Fitness Project','http://fitness.samdeha.com/'),
   (u'GitHub Repository', 'https://github.com/motord/Motorcycle-Diaries'), 
   (u'Kay Framework','http://code.google.com/p/kay-framework/'),

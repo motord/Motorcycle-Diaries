@@ -10,7 +10,7 @@ import logging
 import os
 import datetime
 
-from google.appengine.api.labs import taskqueue
+from google.appengine.api import taskqueue
 from google.appengine.ext import deferred
 
 import blog.config as config
