@@ -34,7 +34,6 @@ INSTALLED_APPS = (
     'blog',
     'piggybank',
     'weatherbug',
-    'sms',
 )
 
 APP_MOUNT_POINTS = {
