@@ -45,6 +45,7 @@ analytics_id = 'UA-7265938-12'
 # enough, you can edit themes/default/base.html instead.
 sidebars = [
   (u'You can help me!', [
+  (u'百姓网推广', 'http://www.baixing.com/?u=59874909'),
   (u'Dropbox Invite', 'http://db.tt/e51caZn'),
   (u'微盘邀请', 'http://vdisk.me/?a=login&code=000qqq&uid=172577#register'),
   (u'美团邀请', 'http://www.meituan.com/r/i13085'),

@@ -51,6 +51,7 @@ post_deploy_tasks.append(generate_static_pages([
     ('/cse.xml', 'blog/cse.xml', False),
     ('/robots.txt', 'blog/robots.txt', False),
     ('/cloudsaveYG/update.xml', 'blog/cloudsaveyg_update.xml', True),
+    ('/reading/bookshelf.html', 'blog/themes/%s/reading.html' % config.theme, False),
     ])) 
 
        
