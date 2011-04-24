@@ -137,7 +137,6 @@ img {
 {% block body %}
 
 	<div class="clear"></div>
-	</div>
   {% if config.disqus_forum %}
     <h3 id="comments">Comments</h3>
     <div id="disqus_thread"></div>
@@ -151,4 +150,84 @@ img {
     <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
   {% endif %}
 
+{% endblock %}
+{% block tail %}
+  <script src="/media/themes/{{config.theme}}/js/sammy-latest.min.js" type="text/javascript"></script>
+  <script src="/media/themes/{{config.theme}}/js/plugins/sammy.template.js"></script>
+  <script src="/media/themes/{{config.theme}}/js/plugins/sammy.storage.js"></script>
+
+  <script type="text/html" id="books_tmpl" data-engine="template">
+	<% for ( var i = 0; i < books.length; i++ ) { %>
+		<% if (i==0) { %><div class="container"><% } %>
+			<% if ((i%4)==0) { %><div class="row"><% } %>
+				<div class="twocol<% if ((i%4)==3 || i==(books.length-1)) { %> last<% } %>">
+					<a href="<%= books[i].url %>">	
+						<img src="<%= books[i].image %>" title="<%= books[i].title %>"></img>
+					</a>
+				</div>
+			<% if ((i%4)==3 || i==(books.length-1)) { %></div><% } %>
+		<% if (i==(books.length-1)) { %></div><% } %>
+	<% } %>
+	<div class="clear"></div>
+  </script>
+
+  <script>
+      (function($) {
+
+		  var app = $.sammy('#mid-content', function() {
+	        this.use('Template');
+	        this.use('Session');
+	        this.use('Cache');
+	        
+		    this.around(function(callback) {
+		      var context = this;
+		      context.books = [];
+		      this.load('./')
+		          .then(function(content) {
+		          	var pdf='#';
+		          	var png;
+		          	var title;		          
+		            $('a',content).each(function(index){
+		            	var href=$(this).attr('href');
+		            	var parts=href.split('/');
+		            	var url=parts.slice(-1);
+		            	parts=url[0].split('.');
+		            	var ext=parts.slice(-1);
+		            	if (ext=='pdf'){
+		            		if (pdf!='#'){
+				            	context.books.push({image: '#',
+					            	url: pdf,
+					            	title: title
+				            	});
+			            	};
+		            		pdf=url;
+		            		title=parts.slice(0,-1).join('.');
+		            	};
+		            	if (ext=='png'){
+		            		png=url;
+			            	context.books.push({image: png,
+				            	url: pdf,
+				            	title: title
+			            	});
+		            		pdf='#';
+			            };
+			         });
+		          })
+		          .then(callback);
+		    });
+		
+		    this.get('#/', function(context) {
+		      context.app.swap('');
+		      context.render($('#books_tmpl'), {books: this.books})
+		      	.appendTo(context.$element());
+		    });
+			
+		  });
+		
+		  $(function() {
+		    app.run('#/');
+		  });
+		
+		})(jQuery);
+  </script>
 {% endblock %}
