@@ -135,7 +135,7 @@ img {
  <li><a href="http://md.samdeha.com/reading/bookshelf.html" class="active"><span><span>Reading</span></span></a></li>
 {% endblock %}
 {% block body %}
-
+	<div id="bookshelf"></div>
 	<div class="clear"></div>
   {% if config.disqus_forum %}
     <h3 id="comments">Comments</h3>
@@ -168,13 +168,12 @@ img {
 			<% if ((i%4)==3 || i==(books.length-1)) { %></div><% } %>
 		<% if (i==(books.length-1)) { %></div><% } %>
 	<% } %>
-	<div class="clear"></div>
   </script>
 
   <script>
       (function($) {
 
-		  var app = $.sammy('#mid-content', function() {
+		  var app = $.sammy('#bookshelf', function() {
 	        this.use('Template');
 	        this.use('Session');
 	        this.use('Cache');
